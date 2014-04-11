@@ -33,11 +33,18 @@ http.createServer(app).listen(app.get('port'), function(){
 
 
 app.get('/', function(req, res) {
-  res.render('index');
+	storage.all(function(err, data) {
+  	res.render('index', {reports: data});
+	})
 });
 
 app.post('/report', function(req, res) {
-	console.log('hi')
+  console.log(res.body);
+  var report = {
+  	how_much: req.body.how_much,
+  	who_paid: req.body.who_paid
+  };
+  storage.insert(report);
   res.render('thanks');
 });
 

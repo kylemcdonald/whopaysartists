@@ -16,6 +16,12 @@
         <input type="submit" class="button" value="Submit">
       </form>
     </div>
-    <div id="stream"></div>
+    <div id="stream">
+      <ul>
+      <% for(var i=0; i<reports.length; i++) {%>
+         <li><%= reports[i].who_paid %> paid <%= reports[i].how_much %></li>
+      <% } %>
+      </ul>
+    </div>
   </body>
 </html>
