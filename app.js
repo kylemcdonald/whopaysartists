@@ -6,6 +6,7 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var freegeoip = require('node-freegeoip');
 
 var app = express();
 var storage = require('./storage')();
@@ -40,7 +41,15 @@ app.get('/', function(req, res) {
 
 app.post('/', function(req, res) {
   console.log(res.body);
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  freegeoip.getLocation(ip, function(err, location) {
+      console.log(location);
+  }); 
+  var user_agent = req.headers['user-agent'];
   var report = {
+    timestamp: Date.now(),
+    ip: ip,
+    user_agent: user_agent,
   	how_much: req.body.how_much,
   	who_paid: req.body.who_paid
   };

@@ -2,16 +2,11 @@
 <html>
   <head>
     <title>who pays artists?</title>
+    <script type='text/javascript' src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type='text/javascript' src='javascripts/main.js'></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <% if (thanks) { %>
-      <div id="thanks">
-      thanks for submitting!
-      </div>
-    <% } %>
-
     <p class="heading">WHO PAYS ARTISTS?</p>
     <p>Who pays artists is a collection of anonymously submitted reports about how artists get paid for their work.</p>
 
@@ -21,6 +16,11 @@
         <p>Who paid you? <input type="text" name="who_paid"></p>
         <input type="submit" class="button" value="Submit">
       </form>
+      <% if (thanks) { %>
+        <div id="thanks">
+        thanks for submitting!
+        </div>
+      <% } %>
     </div>
     <div id="stream">
       <ul>

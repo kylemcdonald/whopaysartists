@@ -9,6 +9,7 @@
     "express": "3.4.8",
     "ejs": "*",
     "mongodb": "^1.4.0",
-    "underscore": "^1.6.0"
+    "underscore": "^1.6.0",
+    "node-freegeoip": "0.0.1"
   }
 }
