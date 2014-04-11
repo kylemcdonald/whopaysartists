@@ -1,8 +1,28 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 18px 'AppleSDGothicNeo', sans-serif;
+  padding: 0;
+  margin: 50px;
 }
+
 
 a {
   color: #00B7FF;
 }
+
+.heading {
+	font-size: 32px;
+}
+
+.button {
+  font: 18px 'AppleSDGothicNeo', sans-serif;
+  border: 1px dotted #7D0541;
+  color: #7D0541;
+  display: inline-block;
+  cursor: pointer;
+  margin: 0 15px 15px 0;
+  padding: 9px 9px 9px 9px;
+  float: left;
+  text-align: left;
+  background: none;
+}
+
