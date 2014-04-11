@@ -34,17 +34,20 @@ http.createServer(app).listen(app.get('port'), function(){
 
 app.get('/', function(req, res) {
 	storage.all(function(err, data) {
-  	res.render('index', {reports: data});
+  	res.render('index', {reports: data, thanks: false});
 	})
 });
 
-app.post('/report', function(req, res) {
+app.post('/', function(req, res) {
   console.log(res.body);
   var report = {
   	how_much: req.body.how_much,
   	who_paid: req.body.who_paid
   };
-  storage.insert(report);
-  res.render('thanks');
+  storage.insert(report, function() {
+  	storage.all(function(err, data) {
+  		res.render('index', {reports: data, thanks: true});
+  	});
+	});
 });
 

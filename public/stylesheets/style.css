@@ -25,3 +25,10 @@ a {
   background: none;
 }
 
+#thanks {
+
+  background: #7D0541;
+  padding: 5px;
+  color: white;
+  font-size: 32px;
+}

@@ -6,11 +6,17 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <% if (thanks) { %>
+      <div id="thanks">
+      thanks for submitting!
+      </div>
+    <% } %>
+
     <p class="heading">WHO PAYS ARTISTS?</p>
     <p>Who pays artists is a collection of anonymously submitted reports about how artists get paid for their work.</p>
 
     <div id="report">
-      <form name="input" action="http://localhost:3000/report" method="post">
+      <form name="input" action="http://localhost:3000/" method="post">
         <p>How much did you get paid? <input type="text" name="how_much"></p>
         <p>Who paid you? <input type="text" name="who_paid"></p>
         <input type="submit" class="button" value="Submit">

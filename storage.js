@@ -27,10 +27,11 @@ module.exports = function(config) {
       };
 
       //insert person
-      storage.insert = function(doc) {
+      storage.insert = function(doc, callback) {
         var collection = storage.db.collection('reports');
         collection.insert(doc, function(err, docs) {
           if (err) console.log(err);
+          callback(docs);
         });
       };
 
