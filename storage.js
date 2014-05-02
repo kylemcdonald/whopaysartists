@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient
-  , format = require('util').format
-  , _ = require('underscore');
+, format = require('util').format
+, _ = require('underscore');
 
 
 module.exports = function(config) {
@@ -18,38 +18,37 @@ module.exports = function(config) {
     storage.db = db;
     storage.db.createCollection('reports', function() {
 
-      //find all people
-      storage.all = function(callback) {
-        var collection = storage.db.collection('reports');
-        collection.find().toArray(function(err, arr) {
-          callback(err, arr);
-        });
-      };
+    //find all people
+    storage.all = function(callback) {
+      var collection = storage.db.collection('reports');
+      collection.find().toArray(function(err, arr) {
+        callback(err, arr);
+      });
+    };
 
-      //insert person
-      storage.insert = function(doc, callback) {
-        var collection = storage.db.collection('reports');
-        collection.insert(doc, function(err, docs) {
-          if (err) console.log(err);
-          callback(docs);
-        });
-      };
+    //insert person
+    storage.insert = function(doc, callback) {
+      var collection = storage.db.collection('reports');
+      collection.insert(doc, function(err, docs) {
+        if (err) console.log(err);
+        callback(docs);
+      });
+    };
 
-      // //insert person
-      // storage.reset = function(callback) {
-      //   storage.db.dropCollection('people', callback);
-      // };
+    // //insert person
+    // storage.reset = function(callback) {
+    //   storage.db.dropCollection('people', callback);
+    // };
 
-      // storage.updateDefaultUsers = function() {
-      //   // initialize default options
-      //   storage.all(function(err, data) {
-      //     storage.default_users = _.map(data, function(obj) { return obj.user; });
-      //   });
-      // };
+    // storage.updateDefaultUsers = function() {
+    //   // initialize default options
+    //   storage.all(function(err, data) {
+    //     storage.default_users = _.map(data, function(obj) { return obj.user; });
+    //   });
+    // };
 
-//      storage.updateDefaultUsers();
+    //      storage.updateDefaultUsers();
     });
-
 
   });
 

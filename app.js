@@ -1,7 +1,7 @@
 
 /**
- * Module dependencies.
- */
+* Module dependencies.
+*/
 
 var express = require('express');
 var http = require('http');
@@ -33,22 +33,22 @@ http.createServer(app).listen(app.get('port'), function(){
 
 
 app.get('/', function(req, res) {
-	storage.all(function(err, data) {
-  	res.render('index', {reports: data, thanks: false});
-	})
+  storage.all(function(err, data) {
+    res.render('index', {reports: data, thanks: false});
+  })
 });
 
 app.post('/', function(req, res) {
   console.log(res.body);
   var report = {
     timestamp: Date.now(),
-  	how_much: req.body.how_much,
-  	who_paid: req.body.who_paid
+    how_much: req.body.how_much,
+    who_paid: req.body.who_paid
   };
   storage.insert(report, function() {
-  	storage.all(function(err, data) {
-  		res.render('index', {reports: data, thanks: true});
-  	});
-	});
+    storage.all(function(err, data) {
+      res.render('index', {reports: data, thanks: true});
+    });
+  });
 });
 
