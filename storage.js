@@ -9,12 +9,20 @@ module.exports = function(config) {
   };
 
 
-  var host = process.env['MONGO_NODE_DRIVER_HOST'] != null ? process.env['MONGO_NODE_DRIVER_HOST'] : 'localhost';
-  var port = process.env['MONGO_NODE_DRIVER_PORT'] != null ? process.env['MONGO_NODE_DRIVER_PORT'] : 27017;
+  var mongoConnect;
+  if(process.env.HEROKU) {
+    mongoConnect = format("mongodb://%s:%s@%s:%s/whopaysartists",
+      process.env.MONGO_USERNAME,
+      process.env.MONGO_PASSWORD,
+      process.env.MONGO_HOST,
+      process.env.MONGO_PORT);
+  } else {
+    var host = 'localhost';
+    var port = 27017;
+    mongoConnect = format("mongodb://%s:%s/whopaysartists", host, port);
+  }
 
-
-  //mongodb://<dbuser>:<dbpassword>@ds053688.mongolab.com:53688/whopaysartists
-  MongoClient.connect(format("mongodb://%s:%s/whopaysartists?w=1", host, port), function(err, db) {
+  MongoClient.connect(mongoConnect, function(err, db) {
     storage.db = db;
     storage.db.createCollection('reports', function() {
 
