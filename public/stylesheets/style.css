@@ -1,20 +1,38 @@
 body {
-  font: 18px 'AppleSDGothicNeo', sans-serif;
   padding: 0;
-  margin: 50px;
-}
+  margin: 0 50px 50px 50px;
 
+  font: 21px "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 21px;
+  line-height: 30px;
+}
 
 a {
   color: #00B7FF;
 }
 
-.heading {
-	font-size: 32px;
+.wrapper {
+  margin: auto;
+  width: 800px;
 }
 
+.header img{
+  width: 100%;
+}
+
+h3{
+   font-family: "Open Sans";
+   font-weight: 300;
+   font-size: 36px;
+   line-height: 30px;
+}
+
+.optional_msg{
+  font-style: italic;
+}
 .button {
-  font: 18px 'AppleSDGothicNeo', sans-serif;
+  font: 18px "Open Sans", sans-serif;
   border: 1px dotted #7D0541;
   color: #7D0541;
   display: inline-block;
@@ -31,4 +49,28 @@ a {
   padding: 5px;
   color: white;
   font-size: 32px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  text-indent: none;
+}
+
+li {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+.date {
+  font-size: 20px;
+  font-style: italic;
+}
+
+.json_link {
+  font-style: italic;
+}
+
+.footer {
+  text-align: center;
+  font-style: italic;
 }
