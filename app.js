@@ -42,8 +42,16 @@ app.post('/', function(req, res) {
   console.log(res.body);
   var report = {
     timestamp: Date.now(),
-    how_much: req.body.how_much,
-    who_paid: req.body.who_paid
+    fee: req.body.fee,
+    currency: req.body.currency,
+    client: req.body.client,
+    job: req.body.job,
+    time_amount: req.body.time_amount,
+    time_unit: req.body.time_unit,
+    experience: req.body.experience,
+    gender: req.body.gender,
+    working_years: req.body.working_years,
+    also: req.body.also
   };
   storage.insert(report, function() {
     storage.all(function(err, data) {

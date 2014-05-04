@@ -2,32 +2,93 @@
 <html>
   <head>
     <title>who pays artists?</title>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,300,400italic,400,600italic,600,700italic,700,800italic,800" rel="stylesheet" type="text/css">
     <script type='text/javascript' src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type='text/javascript' src='javascripts/main.js'></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <p class="heading">WHO PAYS ARTISTS?</p>
-    <p>Who pays artists is a collection of anonymously submitted reports about how artists get paid for their work.</p>
+    <div class="wrapper">
+      <div class="header"><img src="/images/header.png" alt="Who Pays Artists?" /></div>
+      
+      <div>
+        <h3>Making a living as an artist can be hard.</h3>
+        <p>You never know how much to ask for. Discussions about money are taboo because we pretend that passion and creativity alone should pay the bills. Some of the best events have “no budget”, and the worst events can make a career as an artist look sustainable. Let’s help each other sort through some of the confusion, and develop an ongoing dialogue about how artists, especially media artists, make money.</p>
+      </div>
+      
+      <div id="report">
+        <h3>Share your experience.</h3>
+        <span class="optional_msg">All fields are optional.</span>
+        <form name="input" action="./" method="post">
+          <p>I was paid <input type="text" name="fee" />
+            <select name="currency"> 
+              <option value="$">$</option>
+              <option value="€">&euro;</option>
+              <option value="£">&pound;</option>
+            </select>
+            by <input type="text" name="client" /> for a 
+            <select name="job"> 
+              <option value="workshop">workshop</option>
+              <option value="talk/lecture">talk/lecture</option>
+              <option value="teaching position">teaching position</option>
+              <option value="residency">residency</option>
+              <option value="commission">commission</option>
+              <option value="exhibition">exhibition</option>
+            </select>
+            in <input type="text" name="where" />.
+          </p>
+          <p>It took <input type="text" name="time_amount" />
+            <select name="time_unit"> 
+              <option value="hours">hours</option>
+              <option value="days">days</option>
+              <option value="weeks">weeks</option>
+              <option value="months">months</option>
+            </select> of work, and I had a 
+            <select name="experience"> 
+              <option value="unusually good">unusually good</option>
+              <option value="good">good</option>
+              <option value="bad">bad</option>
+              <option value="unusually bad">unusually bad</option>
+            </select>
+            experience.
+          </p>
+          <p>I am a           
+            <select name="gender"> 
+              <option value="woman">woman</option>
+              <option value="man">man</option>
+              <option value="other">other</option>
+            </select>
+            who has been doing this for <input type="text" name="working_years" /> years.
+          </p>
+          <p>
+            Also: <input type="text" name="also" />
+          </p>
+          <input type="submit" class="button" value="Submit">
+        </form>
+        <% if (thanks) { %>
+          <div id="thanks">
+          thanks for submitting!
+          </div>
+        <% } %>
+      </div>
+      
+      <div>
+        <h3>Learn from the experience of others.</h3>
+        <ul>
+        <% for(var i=0; i<reports.length; i++) {%>
+           <li>
+            <%= reports[i].client %> paid a <%= reports[i].sex %> <%= reports[i].fee %><%= reports[i].currency %> for a <%= reports[i].job %> that took <%= reports[i].time_amount %> <%= reports[i].time_unit %>. The artist has been doing this for <%= reports[i].working_years %> years and had a <%= reports[i].experience %> experience.<br />
+            <span class="date"><%= reports[i].timestamp %></span>
+           </li>
+        <% } %>
+        </ul>
+        <a class="json_link" href="#" target="_blank">Access all of the data in a single JSON file.</a>
+      </div>
 
-    <div id="report">
-      <form name="input" action="./" method="post">
-        <p>How much did you get paid? <input type="text" name="how_much"></p>
-        <p>Who paid you? <input type="text" name="who_paid"></p>
-        <input type="submit" class="button" value="Submit">
-      </form>
-      <% if (thanks) { %>
-        <div id="thanks">
-        thanks for submitting!
-        </div>
-      <% } %>
-    </div>
-    <div id="stream">
-      <ul>
-      <% for(var i=0; i<reports.length; i++) {%>
-         <li><%= reports[i].who_paid %> paid <%= reports[i].how_much %></li>
-      <% } %>
-      </ul>
+      <div class="footer">
+        <a href="mailto:info@example.com" target="_blank">Contact us</a> for information or removals<br />
+        <a href="https://github.com/kylemcdonald/whopaysartists/" target="_blank">Contribute to this site on GitHub</a>
+      </div>
     </div>
   </body>
 </html>
