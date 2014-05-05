@@ -38,6 +38,25 @@ app.get('/', function(req, res) {
   })
 });
 
+function shuffle(array) {
+    var counter = array.length, temp, index;
+    while (counter > 0) {
+        index = Math.floor(Math.random() * counter);
+        counter--;
+        temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+    }
+    return array;
+}
+
+app.get('/json', function(req, res) {
+  storage.all(function(err, data) {
+    shuffle(data);
+    res.send(data);
+  })
+});
+
 function getTimeOfMonth(date) {
   var day = date.getDate();
   if(day < 10) {
@@ -48,9 +67,7 @@ function getTimeOfMonth(date) {
     return "late";
   }
 }
-
 app.post('/', function(req, res) {
-  console.log(res.body);
   var date = new Date();
   var report = {
     // generated
