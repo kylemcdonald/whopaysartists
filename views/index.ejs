@@ -79,13 +79,14 @@
       <div>
         <h3>Learn from the experience of others.</h3>
         <ul>
+        <% var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; %>
         <% for(var i=0; i<reports.length; i++) {%>
            <li>
             <p>I was paid <%= reports[i].fee %> <%= reports[i].currency %> by <%= reports[i].client %> for a <%= reports[i].job %> in <%= reports[i].where %>.</p>
             <p>It took <%= reports[i].time_amount %> <%= reports[i].time_unit %> of work, and I had a <%= reports[i].experience %> experience.</p>
             <p>I am a <%= reports[i].gender %> who has been doing this for <%= reports[i].working_years %> years.</p>
             <p>Also: <%= reports[i].also %></p>
-            <p class="date">Submitted in <%= reports[i].time_of_month %> <%= reports[i].month_and_year %></p>
+            <p class="date">Submitted in <%= reports[i].time_of_month %> <%= monthNames[reports[i].month] %> <%= reports[i].year %></p>
            </li>
         <% } %>
         </ul>

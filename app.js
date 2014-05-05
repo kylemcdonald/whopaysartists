@@ -38,20 +38,24 @@ app.get('/', function(req, res) {
   })
 });
 
-function getMonthAndYear(date) {
-  return date; // todo
-}
-
 function getTimeOfMonth(date) {
-  return "early"; // todo: early, mid, late
+  var day = date.getDate();
+  if(day < 10) {
+    return "early";
+  } else if(day < 20) {
+    return "mid";
+  } else {
+    return "late";
+  }
 }
 
 app.post('/', function(req, res) {
   console.log(res.body);
-  var date = Date.now();
+  var date = new Date();
   var report = {
     // generated
-    month_and_year: getMonthAndYear(date),
+    month: date.getMonth(),
+    year: date.getFullYear(),
     time_of_month: getTimeOfMonth(date),
     // submitted
     fee: req.body.fee,
