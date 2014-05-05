@@ -6,6 +6,7 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var json2csv = require('json2csv');
 
 var app = express();
 var storage = require('./storage')();
@@ -50,12 +51,27 @@ function shuffle(array) {
     return array;
 }
 
-app.get('/json', function(req, res) {
+app.get('/data.json', function(req, res) {
   storage.all(function(err, data) {
     shuffle(data);
+    res.attachment('data.json');
+    res.set('Content-type', 'application/json');
     res.send(data);
   })
-});
+})
+
+var fields = ["time_of_month", "month", "year", "fee", "currency", "client", "where", "job", "time_amount", "time_unit", "experience", "gender", "working_years", "also"];
+var fieldNames = ["Time of month", "Month", "Year", "Fee", "Currency", "Client", "Where", "Job", "Time amount", "Time unit", "Experience", "Gender", "Working years", "Also"];
+app.get('/data.csv', function(req, res) {
+  storage.all(function(err, data) {
+    shuffle(data);
+    json2csv({data: data, fields: fields, fieldNames: fieldNames}, function(err, csv) {
+      res.attachment('data.csv');
+      res.set('Content-Type', 'text/csv');
+      res.send(csv);
+    })
+  })
+})
 
 function getTimeOfMonth(date) {
   var day = date.getDate();
@@ -71,9 +87,9 @@ app.post('/', function(req, res) {
   var date = new Date();
   var report = {
     // generated
+    time_of_month: getTimeOfMonth(date),
     month: date.getMonth(),
     year: date.getFullYear(),
-    time_of_month: getTimeOfMonth(date),
     // submitted
     fee: req.body.fee,
     currency: req.body.currency,
