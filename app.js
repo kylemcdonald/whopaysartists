@@ -38,13 +38,26 @@ app.get('/', function(req, res) {
   })
 });
 
+function getMonthAndYear(date) {
+  return date; // todo
+}
+
+function getTimeOfMonth(date) {
+  return "early"; // todo: early, mid, late
+}
+
 app.post('/', function(req, res) {
   console.log(res.body);
+  var date = Date.now();
   var report = {
-    timestamp: Date.now(),
+    // generated
+    month_and_year: getMonthAndYear(date),
+    time_of_month: getTimeOfMonth(date),
+    // submitted
     fee: req.body.fee,
     currency: req.body.currency,
     client: req.body.client,
+    where: req.body.where,
     job: req.body.job,
     time_amount: req.body.time_amount,
     time_unit: req.body.time_unit,

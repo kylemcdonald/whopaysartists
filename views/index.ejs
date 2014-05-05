@@ -81,8 +81,11 @@
         <ul>
         <% for(var i=0; i<reports.length; i++) {%>
            <li>
-            <%= reports[i].client %> paid a <%= reports[i].sex %> <%= reports[i].fee %><%= reports[i].currency %> for a <%= reports[i].job %> that took <%= reports[i].time_amount %> <%= reports[i].time_unit %>. The artist has been doing this for <%= reports[i].working_years %> years and had a <%= reports[i].experience %> experience.<br />
-            <span class="date"><%= reports[i].timestamp %></span>
+            <p>I was paid <%= reports[i].fee %> <%= reports[i].currency %> by <%= reports[i].client %> for a <%= reports[i].job %> in <%= reports[i].where %>.</p>
+            <p>It took <%= reports[i].time_amount %> <%= reports[i].time_unit %> of work, and I had a <%= reports[i].experience %> experience.</p>
+            <p>I am a <%= reports[i].gender %> who has been doing this for <%= reports[i].working_years %> years.</p>
+            <p>Also: <%= reports[i].also %></p>
+            <p class="date">Submitted in <%= reports[i].time_of_month %> <%= reports[i].month_and_year %></p>
            </li>
         <% } %>
         </ul>
