@@ -10,6 +10,7 @@
     "ejs": "*",
     "mongodb": "^1.4.0",
     "underscore": "^1.6.0",
-    "json2csv": "^2.2.1"
+    "json2csv": "^2.2.1",
+    "express-validator": "^2.1.2"
   }
 }

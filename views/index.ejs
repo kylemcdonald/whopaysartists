@@ -17,9 +17,9 @@
       </div>
       
       <div id="report">
-        <h3>Share your experience.</h3>
+        <h3 id="share">Share your experience.</h3>
         <span class="optional_msg">All fields are optional.</span>
-        <form name="input" action="./" method="post">
+        <form name="input" action="./#share" method="post">
           <p>I was paid <input type="number" name="fee" />
             <select name="currency"> 
               <option value="$">$</option>
@@ -33,6 +33,7 @@
               <option value="talk/lecture">talk/lecture</option>
               <option value="teaching position">teaching position</option>
               <option value="residency">residency</option>
+              <option value="grant">grant</option>
               <option value="commission">commission</option>
               <option value="exhibition">exhibition</option>
             </select>
@@ -71,13 +72,22 @@
         </form>
         <% if (thanks) { %>
           <div id="thanks">
-          thanks for submitting!
+          Thanks for sharing!
+          </div>
+        <% } %>
+        <% if (errors) { %>
+          <div id="errors">
+            <% for(var i=0; i<errors.length; i++) { %>
+              <li>
+                <%= errors[i].msg %>
+              </li>
+            <% } %>
           </div>
         <% } %>
       </div>
       
       <div>
-        <h3>Learn from the experience of others.</h3>
+        <h3 id="learn">Learn from the experience of others.</h3>
         <ul>
         <% var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; %>
         <% for(var i=0; i<reports.length; i++) {%>

@@ -4,6 +4,7 @@
 */
 
 var express = require('express');
+var expressValidator = require('express-validator');
 var http = require('http');
 var path = require('path');
 var json2csv = require('json2csv');
@@ -17,6 +18,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.favicon());
 app.use(express.logger('dev'));
+app.use(express.bodyParser());
+app.use(expressValidator());
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
@@ -35,7 +38,7 @@ http.createServer(app).listen(app.get('port'), function(){
 
 app.get('/', function(req, res) {
   storage.all(function(err, data) {
-    res.render('index', {reports: data, thanks: false});
+    res.render('index', {reports: data, thanks: false, errors: {}});
   })
 });
 
@@ -83,30 +86,50 @@ function getTimeOfMonth(date) {
     return "late";
   }
 }
+
+var currencies = ['$', '€', '£'];
+var jobs = ['', 'workshop', 'talk/lecture', 'teaching position', 'residency', 'grant', 'commission', 'exhibition'];
+var timeUnits = ['', 'hours', 'days', 'weeks', 'months'];
+
 app.post('/', function(req, res) {
-  var date = new Date();
-  var report = {
-    // generated
-    time_of_month: getTimeOfMonth(date),
-    month: date.getMonth(),
-    year: date.getFullYear(),
-    // submitted
-    fee: req.body.fee,
-    currency: req.body.currency,
-    client: req.body.client,
-    where: req.body.where,
-    job: req.body.job,
-    time_amount: req.body.time_amount,
-    time_unit: req.body.time_unit,
-    experience: req.body.experience,
-    gender: req.body.gender,
-    working_years: req.body.working_years,
-    also: req.body.also
-  };
-  storage.insert(report, function() {
+  req.assert('fee', 'Fee is invalid.').isInt().isLength(0, 6);
+  req.assert('currency', 'Currency must be one of: ' + currencies.join(',') + '.').isIn(currencies);
+  req.assert('client', 'Client is too long.').isLength(0, 80);
+  req.assert('where', 'Where is too long.').isLength(0, 80);
+  req.assert('job', 'Job must be one of: ' + jobs.join(',') + '.').isIn(jobs);
+  req.assert('time_amount', 'Time amount is invalid.').isInt().isLength(0, 4);
+  req.assert('time_unit', 'Time unit must be one of: ' + timeUnits.join(',') + '.').isIn(timeUnits);
+
+  var errors = req.validationErrors();  
+  if(errors) {
     storage.all(function(err, data) {
-      res.render('index', {reports: data, thanks: true});
+      res.render('index', {reports: data, thanks: false, errors: errors}); 
+    })
+  } else {
+    var date = new Date();
+    var report = {
+      // generated
+      time_of_month: getTimeOfMonth(date),
+      month: date.getMonth(),
+      year: date.getFullYear(),
+      // submitted
+      fee: req.body.fee,
+      currency: req.body.currency,
+      client: req.body.client,
+      where: req.body.where,
+      job: req.body.job,
+      time_amount: req.body.time_amount,
+      time_unit: req.body.time_unit,
+      experience: req.body.experience,
+      gender: req.body.gender,
+      working_years: req.body.working_years,
+      also: req.body.also
+    };
+    storage.insert(report, function() {
+      storage.all(function(err, data) {
+        res.render('index', {reports: data, thanks: true, errors: errors});
+      });
     });
-  });
+  }
 });
 
