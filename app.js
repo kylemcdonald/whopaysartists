@@ -90,15 +90,23 @@ function getTimeOfMonth(date) {
 var currencies = ['$', '€', '£'];
 var jobs = ['', 'workshop', 'talk/lecture', 'teaching position', 'residency', 'grant', 'commission', 'exhibition'];
 var timeUnits = ['', 'hours', 'days', 'weeks', 'months'];
+var experiences = ['', 'unusually good', 'good', 'bad', 'unusually bad'];
+var genders = ['', 'other', 'woman', 'man'];
 
 app.post('/', function(req, res) {
-  req.assert('fee', 'Fee is invalid.').isInt().isLength(0, 6);
+  req.assert('fee', 'Fee is invalid.').matches(/^\d{0,6}$/);
   req.assert('currency', 'Currency must be one of: ' + currencies.join(',') + '.').isIn(currencies);
   req.assert('client', 'Client is too long.').isLength(0, 80);
   req.assert('where', 'Where is too long.').isLength(0, 80);
   req.assert('job', 'Job must be one of: ' + jobs.join(',') + '.').isIn(jobs);
-  req.assert('time_amount', 'Time amount is invalid.').isInt().isLength(0, 4);
+  req.assert('time_amount', 'Time amount is invalid.').matches(/^\d{0,4}$/);
   req.assert('time_unit', 'Time unit must be one of: ' + timeUnits.join(',') + '.').isIn(timeUnits);
+  req.assert('experience', 'Experience must be one of: ' + experiences.join(',') + '.').isIn(experiences);
+  req.assert('working_years', 'Working years are invalid.').matches(/^\d{0,2}$/);
+  req.assert('also', 'Also is too long.').isLength(0, 160);
+
+  // todo: require at least one field to be filled out
+  // todo: fill fields out again or make the user go back
 
   var errors = req.validationErrors();  
   if(errors) {
@@ -115,15 +123,15 @@ app.post('/', function(req, res) {
       // submitted
       fee: req.body.fee,
       currency: req.body.currency,
-      client: req.body.client,
-      where: req.body.where,
+      client: (req.body.client),
+      where: (req.body.where),
       job: req.body.job,
       time_amount: req.body.time_amount,
       time_unit: req.body.time_unit,
       experience: req.body.experience,
       gender: req.body.gender,
       working_years: req.body.working_years,
-      also: req.body.also
+      also: (req.body.also)
     };
     storage.insert(report, function() {
       storage.all(function(err, data) {
