@@ -20,7 +20,7 @@
         <h3>Share your experience.</h3>
         <span class="optional_msg">All fields are optional.</span>
         <form name="input" action="./" method="post">
-          <p>I was paid <input type="text" name="fee" />
+          <p>I was paid <input type="number" name="fee" />
             <select name="currency"> 
               <option value="$">$</option>
               <option value="€">&euro;</option>
@@ -38,7 +38,7 @@
             </select>
             in <input type="text" name="where" />.
           </p>
-          <p>It took <input type="text" name="time_amount" />
+          <p>It took <input type="number" name="time_amount" />
             <select name="time_unit"> 
               <option value=""></option>
               <option value="hours">hours</option>
@@ -62,7 +62,7 @@
               <option value="man">man</option>
               <option value="other">other</option>
             </select>
-            who has been doing this for <input type="text" name="working_years" /> years.
+            who has been doing this for <input type="number" name="working_years" /> years.
           </p>
           <p>
             Also: <input type="text" name="also" />
