@@ -2,22 +2,23 @@
 <html>
   <head>
     <title>Who Pays Artists?</title>
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,300,400italic,400,600italic,600,700italic,700,800italic,800" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
     <script type='text/javascript' src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type='text/javascript' src='javascripts/main.js'></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <div class="wrapper">
-      <div class="header"><img src="/images/header.png" alt="Who Pays Artists?" /></div>
-      
-      <div>
+
+      <div class="header">Who Pays<img src="images/header.png"/>Artists<span class="q">?</span></div>
+
+      <div id="intro">
         <h3>Making a living as an artist can be hard.</h3>
         <p>You never know how much to ask for. Discussions about money are taboo because we pretend that passion and creativity alone should pay the bills. Some of the best events have “no budget”, and the worst events can make a career as an artist look sustainable. Let’s help each other sort through some of the confusion, and develop an ongoing dialogue about how artists, especially media artists, make money.</p>
       </div>
       
-      <div id="report">
-        <h3 id="share">Share your experience.</h3>
+      <div id="share">
+        <h3>Share your experience.</h3>
         <span class="optional_msg">All fields are optional.</span>
         <form name="input" action="./#share" method="post">
           <p>I was paid <input type="number" name="fee" />
@@ -68,7 +69,7 @@
           <p>
             Also: <input type="text" name="also" />
           </p>
-          <input type="submit" class="button" value="Submit">
+          <input type="submit" value="Submit">
         </form>
         <% if (thanks) { %>
           <div id="thanks">
@@ -86,8 +87,8 @@
         <% } %>
       </div>
       
-      <div>
-        <h3 id="learn">Learn from the experience of others.</h3>
+      <div id="learn">
+        <h3>Learn from the experience of others.</h3>
         <ul>
         <% var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; %>
         <% for(var i=0; i<reports.length; i++) {%>
@@ -100,13 +101,13 @@
            </li>
         <% } %>
         </ul>
-      </div>
       
-      <div class="download">
-        <p>Access all of the data in a single <a href="data.json">JSON</a> or <a href="data.csv">CSV</a> file.</a>
+        <div id="download">
+          <p>Access all of the data in a single <a href="data.json">JSON</a> or <a href="data.csv">CSV</a> file.</a>
+        </div>
       </div>
 
-      <div class="footer">
+      <div id="footer">
         <a href="mailto:info@whopaysartists.com" target="_blank">Contact us</a> for information or removals<br />
         <a href="https://github.com/kylemcdonald/whopaysartists/" target="_blank">Contribute to this site on GitHub</a>
       </div>
