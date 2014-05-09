@@ -64,17 +64,18 @@ h2{
 
 #share {
   background-color: rgb(221, 186, 23);
-  font-size: 24px;
 }
 
 #share p {
-  margin: 0;
+  margin: 5px 0;
+}
+
+.optional{
+  font-style: italic;
+  font-size: 18px;
 }
 
 input, .styled-select {
-  font-size: 24px;
-  font-family: "Open Sans Condensed", sans-serif;
-
   border: 2px solid rgb(215, 215, 215);
   border-radius:10px;
   box-shadow: inset 0 5px 5px rgba(0, 0, 0, .1);
@@ -84,31 +85,33 @@ input, .styled-select {
   overflow: hidden;
 }
 
+#share, select, input {
+  font-size: 20px;
+  font-family: "Open Sans Condensed", sans-serif;
+}
+
 input {
   padding: 0px 10px;
 }
 
-.styled-select select {
+select {
   background: transparent;
   padding: 5px;
-  font-size: 16px;
   line-height: 1;
   border: 0;
   border-radius: 0;
   height: 34px;
   -webkit-appearance: none;
-
-  font-size: 24px;
-  font-family: "Open Sans Condensed", sans-serif;
 }
 
 .styled-select {
   display: inline;
   background: url("../images/arrow.png") no-repeat right white;
+  background-size: 10px 10px;
 }
 
 .submit {
-  font-size: 30px;
+  font-size: 28px;
   color: white;
   border: 2px solid rgb(215, 215, 215);
   background-color: rgb(248, 120, 0);
@@ -117,7 +120,7 @@ input {
 }
 
 .fee{width: 3em;}
-.client{width: 200px}
+.client{width: 150px}
 .where{width: 100px;}
 .time_amount{width: 50px;}
 .working_years {width: 2em;}
@@ -127,13 +130,7 @@ input {
   background-color: rgb(215, 100, 0);
 }
 
-.optional{
-  font-style: italic;
-  font-size: 18px;
-}
-
 #thanks {
-
   background: #7D0541;
   padding: 5px;
   color: white;
@@ -147,9 +144,14 @@ ul {
 }
 
 li {
-  margin-bottom: 20px;
-  font-size: 24px;
+  margin-bottom: 2em;
+  font-size: 28px;
 }
+
+li p {
+  margin: 0;
+}
+
 .date {
   font-size: 20px;
   font-style: italic;
