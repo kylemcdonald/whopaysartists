@@ -10,70 +10,82 @@
   <body>
     <div class="wrapper">
 
-      <div id="header" class="section">Who Pays<img src="images/header.png"/>Artists<span class="q">?</span></div>
+      <div id="header" class="section">
+        <h1>Who Pays<img src="images/header.png"/>Artists<span class="q">?</span></h1>
+      </div>
 
       <img src="images/top-background.png" class="split"/>
 
       <div id="intro" class="section">
-        <h3>Making a living as an artist can be hard.</h3>
+        <h2>Making a living as an artist can be hard.</h2>
         <p>You never know how much to ask for. Discussions about money are taboo because we pretend that passion and creativity alone should pay the bills. Some of the best events have “no budget”, and the worst events can make a career as an artist look sustainable. Let’s help each other sort through some of the confusion, and develop an ongoing dialogue about how artists, especially media artists, make money.</p>
       </div>
 
       <img src="images/white-background.png" class="split"/>
-      
+
       <div id="share" class="section">
-        <h3>Share your experience.</h3>
-        <span class="optional_msg">All fields are optional.</span>
+        <h2>Share your experience.</h2>
+        <p class="optional">All fields are optional.</p>
         <form name="input" action="./#share" method="post">
-          <p>I was paid <input type="number" name="fee" />
-            <select name="currency"> 
-              <option value="$">$</option>
-              <option value="€">&euro;</option>
-              <option value="£">&pound;</option>
-            </select>
-            by <input type="text" name="client" /> for a 
-            <select name="job"> 
-              <option value=""></option>
-              <option value="workshop">workshop</option>
-              <option value="talk/lecture">talk/lecture</option>
-              <option value="teaching position">teaching position</option>
-              <option value="residency">residency</option>
-              <option value="grant">grant</option>
-              <option value="commission">commission</option>
-              <option value="exhibition">exhibition</option>
-            </select>
-            in <input type="text" name="where" />.
+          <p>I was paid <input type="number" name="fee" class="fee" />
+            <div class="styled-select">
+              <select name="currency">
+                <option value="$">$</option>
+                <option value="€">&euro;</option>
+                <option value="£">&pound;</option>
+              </select>
+            </div>
+            by <input type="text" name="client" class="client" /> for a
+            <div class="styled-select">
+              <select name="job">
+                <option value=""></option>
+                <option value="workshop">workshop</option>
+                <option value="talk/lecture">talk/lecture</option>
+                <option value="teaching position">teaching position</option>
+                <option value="residency">residency</option>
+                <option value="grant">grant</option>
+                <option value="commission">commission</option>
+                <option value="exhibition">exhibition</option>
+              </select>
+            </div>
+            in <input type="text" name="where" class="where" />.
           </p>
-          <p>It took <input type="number" name="time_amount" />
-            <select name="time_unit"> 
-              <option value=""></option>
-              <option value="hours">hours</option>
-              <option value="days">days</option>
-              <option value="weeks">weeks</option>
-              <option value="months">months</option>
-            </select> of work, and I had a 
-            <select name="experience"> 
-              <option value=""></option>
-              <option value="unusually good">unusually good</option>
-              <option value="good">good</option>
-              <option value="bad">bad</option>
-              <option value="unusually bad">unusually bad</option>
-            </select>
+          <p>It took <input type="number" name="time_amount" class="time_amount" />
+            <div class="styled-select">
+              <select name="time_unit">
+                <option value=""></option>
+                <option value="hours">hours</option>
+                <option value="days">days</option>
+                <option value="weeks">weeks</option>
+                <option value="months">months</option>
+              </select>
+            </div> of work, and I had a
+            <div class="styled-select">
+              <select name="experience">
+                <option value=""></option>
+                <option value="unusually good">unusually good</option>
+                <option value="good">good</option>
+                <option value="bad">bad</option>
+                <option value="unusually bad">unusually bad</option>
+              </select>
+            </div>
             experience.
           </p>
-          <p>I am a           
-            <select name="gender"> 
-              <option value=""></option>
-              <option value="woman">woman</option>
-              <option value="man">man</option>
-              <option value="other">other</option>
-            </select>
-            who has been doing this for <input type="number" name="working_years" /> years.
+          <p>I am a
+            <div class="styled-select">
+              <select name="gender">
+                <option value=""></option>
+                <option value="other">other</option>
+                <option value="woman">woman</option>
+                <option value="man">man</option>
+              </select>
+            </div>
+            who has been doing this for <input type="number" name="working_years" class="working_years" /> years.
           </p>
           <p>
             Also: <input type="text" name="also" />
           </p>
-          <input type="submit" value="Submit">
+          <input type="submit" value="Submit" class="submit">
         </form>
         <% if (thanks) { %>
           <div id="thanks">
@@ -92,9 +104,9 @@
       </div>
 
       <img src="images/yellow-background.png" class="split"/>
-      
+
       <div id="learn" class="section">
-        <h3>Learn from the experience of others.</h3>
+        <h2>Learn from the experience of others.</h2>
         <ul>
         <% var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; %>
         <% for(var i=0; i<reports.length; i++) {%>
