@@ -10,14 +10,18 @@
   <body>
     <div class="wrapper">
 
-      <div class="header">Who Pays<img src="images/header.png"/>Artists<span class="q">?</span></div>
+      <div id="header" class="section">Who Pays<img src="images/header.png"/>Artists<span class="q">?</span></div>
 
-      <div id="intro">
+      <img src="images/top-background.png" class="split"/>
+
+      <div id="intro" class="section">
         <h3>Making a living as an artist can be hard.</h3>
         <p>You never know how much to ask for. Discussions about money are taboo because we pretend that passion and creativity alone should pay the bills. Some of the best events have “no budget”, and the worst events can make a career as an artist look sustainable. Let’s help each other sort through some of the confusion, and develop an ongoing dialogue about how artists, especially media artists, make money.</p>
       </div>
+
+      <img src="images/white-background.png" class="split"/>
       
-      <div id="share">
+      <div id="share" class="section">
         <h3>Share your experience.</h3>
         <span class="optional_msg">All fields are optional.</span>
         <form name="input" action="./#share" method="post">
@@ -86,8 +90,10 @@
           </div>
         <% } %>
       </div>
+
+      <img src="images/yellow-background.png" class="split"/>
       
-      <div id="learn">
+      <div id="learn" class="section">
         <h3>Learn from the experience of others.</h3>
         <ul>
         <% var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; %>
@@ -101,16 +107,12 @@
            </li>
         <% } %>
         </ul>
-      
-        <div id="download">
-          <p>Access all of the data in a single <a href="data.json">JSON</a> or <a href="data.csv">CSV</a> file.</a>
-        </div>
-      </div>
-
-      <div id="footer">
-        <a href="mailto:info@whopaysartists.com" target="_blank">Contact us</a> for information or removals<br />
-        <a href="https://github.com/kylemcdonald/whopaysartists/" target="_blank">Contribute to this site on GitHub</a>
       </div>
     </div>
+
+      <div id="footer">
+        <p>Access all of the data in a single <a href="data.json">JSON</a> or <a href="data.csv">CSV</a> file.</a></p>
+        <p><a href="mailto:info@whopaysartists.com" target="_blank">Contact us</a> or contribute on <a href="https://github.com/kylemcdonald/whopaysartists/" target="_blank">GitHub</a></p>
+      </div>
   </body>
 </html>

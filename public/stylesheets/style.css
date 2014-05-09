@@ -15,9 +15,22 @@ a {
   margin: auto;
   width: 800px;
   max-width: 100%;
+  box-shadow: 0px 0px 50px #888;
 }
 
-.header {
+.section {
+  padding: 50px 5% 20px;
+  margin: 0;
+}
+
+.split {
+  clear: none;
+  display: inline;
+  position: absolute;
+  margin: 0;
+}
+
+#header {
   margin: 0;
   padding: 0;
   font-family: "Oswald", sans-serif;
@@ -31,22 +44,17 @@ a {
   text-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
 }
 
-.header .q {
+#header .q {
   position: relative;
   top: 0px;
   font-size: 76px;
 }
 
-.header img{
+#header img{
   height: 90px;
   position: relative;
   top: 25px;
   margin: 0px 20px;
-}
-
-#intro, #share, #learn {
-  padding: 0 5%;
-  margin: 0;
 }
 
 #intro {
@@ -66,6 +74,7 @@ h3{
    font-family: "Open Sans Condensed";
    font-size: 36px;
    line-height: 30px;
+   margin: 0;
 }
 
 .optional_msg{
