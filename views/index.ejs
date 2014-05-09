@@ -28,15 +28,15 @@
         <p class="optional">All fields are optional.</p>
         <form name="input" action="./#share" method="post">
           <p>I was paid <input type="number" name="fee" class="fee" />
-            <div class="styled-select">
+            <span class="styled-select">
               <select name="currency">
                 <option value="$">$</option>
                 <option value="€">&euro;</option>
                 <option value="£">&pound;</option>
               </select>
-            </div>
+            </span>
             by <input type="text" name="client" class="client" /> for a
-            <div class="styled-select">
+            <span class="styled-select">
               <select name="job">
                 <option value=""></option>
                 <option value="workshop">workshop</option>
@@ -47,11 +47,11 @@
                 <option value="commission">commission</option>
                 <option value="exhibition">exhibition</option>
               </select>
-            </div>
+            </span>
             in <input type="text" name="where" class="where" />.
           </p>
           <p>It took <input type="number" name="time_amount" class="time_amount" />
-            <div class="styled-select">
+            <span class="styled-select">
               <select name="time_unit">
                 <option value=""></option>
                 <option value="hours">hours</option>
@@ -59,8 +59,8 @@
                 <option value="weeks">weeks</option>
                 <option value="months">months</option>
               </select>
-            </div> of work, and I had a
-            <div class="styled-select">
+            </span> of work, and I had a
+            <span class="styled-select">
               <select name="experience">
                 <option value=""></option>
                 <option value="unusually good">unusually good</option>
@@ -68,18 +68,18 @@
                 <option value="bad">bad</option>
                 <option value="unusually bad">unusually bad</option>
               </select>
-            </div>
+            </span>
             experience.
           </p>
           <p>I am a
-            <div class="styled-select">
+            <span class="styled-select">
               <select name="gender">
                 <option value=""></option>
                 <option value="other">other</option>
                 <option value="woman">woman</option>
                 <option value="man">man</option>
               </select>
-            </div>
+            </span>
             who has been doing this for <input type="number" name="working_years" class="working_years" /> years.
           </p>
           <p>
