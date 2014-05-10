@@ -88,7 +88,7 @@ function getTimeOfMonth(date) {
   }
 }
 
-var currencies = ['$', '€', '£'];
+var currencies = ['$', '€', '£', '¥'];
 var jobs = ['', 'workshop', 'talk/lecture', 'teaching position', 'residency', 'grant', 'commission', 'exhibition'];
 var timeUnits = ['', 'hours', 'days', 'weeks', 'months'];
 var experiences = ['', 'unusually good', 'good', 'bad', 'unusually bad'];
