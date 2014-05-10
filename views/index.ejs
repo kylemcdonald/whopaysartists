@@ -53,9 +53,8 @@
           <p>It took <input type="number" name="time_amount" class="time_amount" />
             <span class="styled-select">
               <select name="time_unit">
-                <option value=""></option>
                 <option value="hours">hours</option>
-                <option value="days">days</option>
+                <option value="days" selected="selected">days</option>
                 <option value="weeks">weeks</option>
                 <option value="months">months</option>
               </select>
@@ -109,12 +108,49 @@
         <h2>Learn from the experience of others.</h2>
         <ul>
         <% var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; %>
-        <% for(var i=0; i<reports.length; i++) {%>
+        <% for(var i=0; i<reports.length; i++) { %>
            <li>
-            <p>I was paid <%= reports[i].fee %> <%= reports[i].currency %> by <%= reports[i].client %> for a <%= reports[i].job %> in <%= reports[i].where %>.</p>
-            <p>It took <%= reports[i].time_amount %> <%= reports[i].time_unit %> of work, and I had a <%= reports[i].experience %> experience.</p>
-            <p>I am a <%= reports[i].gender %> who has been doing this for <%= reports[i].working_years %> years.</p>
-            <p>Also: <%= reports[i].also %></p>
+
+            <p>I was paid
+              <% if ( reports[i].fee ) { 
+                if ( reports[i].currency == '$' ) { %>
+                 <%= reports[i].currency %><%= reports[i].fee %>
+                 <% } else { %>
+                 <%= reports[i].fee %><%= reports[i].currency %>
+                 <%
+               }
+              } %>
+              <% if ( reports[i].client ) { %>
+                 by <%= reports[i].client %>
+              <% } %>
+              <% if ( reports[i].job ) { %>
+                 for a <%= reports[i].job %>
+              <% } %>
+              <% if ( reports[i].where ) { %>
+                 in <%= reports[i].where %>
+              <% } %>
+            .</p>
+
+            <% if ( reports[i].time_amount && reports[i].experience ) { %>
+              <p>It took <%= reports[i].time_amount %> <%= reports[i].time_unit %> of work, and I had a <%= reports[i].experience %> experience.</p>
+            <% } else if ( reports[i].time_amount ) { %>
+              <p>It took <%= reports[i].time_amount %> <%= reports[i].time_unit %> of work.</p>
+            <% } else if ( reports[i].experience ) { %>
+              <p>I had a <%= reports[i].experience %> experience.</p>
+            <% } %>
+
+            <% if ( reports[i].gender && reports[i].working_years ) { %>
+              <p>I am a <%= reports[i].gender %> who has been doing this for <%= reports[i].working_years %> years.</p>
+            <% } else if ( reports[i].gender ) { %>
+              <p>I am a <%= reports[i].gender %>.</p>
+            <% } else if ( reports[i].working_years ) { %>
+              <p>I have been doing this for <%= reports[i].working_years %> years.</p>
+            <% } %>
+
+            <% if (reports[i].also) { %>
+              <p>Also: <%= reports[i].also %></p>
+            <% } %>
+
             <p class="date">Submitted in <%= reports[i].time_of_month %> <%= monthNames[reports[i].month] %> <%= reports[i].year %></p>
            </li>
         <% } %>

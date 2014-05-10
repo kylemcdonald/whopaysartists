@@ -105,9 +105,6 @@ app.post('/', function(req, res) {
   req.assert('working_years', 'Working years are invalid.').matches(/^\d{0,2}$/);
   req.assert('also', 'Also is too long.').isLength(0, 160);
 
-  // todo: require at least one field to be filled out
-  // todo: fill fields out again or make the user go back
-
   var errors = req.validationErrors();  
   if(errors) {
     storage.all(function(err, data) {
