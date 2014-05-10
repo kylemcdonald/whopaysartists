@@ -27,15 +27,14 @@
         <h2>Share your experience.</h2>
         <p class="optional">All fields are optional.</p>
         <form name="input" action="./#share" method="post">
-          <p>I was paid <input type="number" name="fee" class="fee" />
+          <p>I was paid <input type="number" name="fee" class="fee" placeholder="500" />
             <span class="styled-select">
               <select name="currency">
                 <option value="$">$</option>
                 <option value="€">&euro;</option>
                 <option value="£">&pound;</option>
-              </select>
-            </span>
-            by <input type="text" name="client" class="client" /> for a
+              </select></span>
+             by <input type="text" name="client" class="client" placeholder="Eyebeam" /> for a
             <span class="styled-select">
               <select name="job">
                 <option value=""></option>
@@ -46,19 +45,18 @@
                 <option value="grant">grant</option>
                 <option value="commission">commission</option>
                 <option value="exhibition">exhibition</option>
-              </select>
-            </span>
-            in <input type="text" name="where" class="where" />.
+              </select></span>
+           in <input type="text" name="where" class="where" placeholder="New York" />.
           </p>
-          <p>It took <input type="number" name="time_amount" class="time_amount" />
+          <p>It took <input type="number" name="time_amount" class="time_amount" placeholder="2" />
             <span class="styled-select">
               <select name="time_unit">
                 <option value="hours">hours</option>
                 <option value="days" selected="selected">days</option>
                 <option value="weeks">weeks</option>
                 <option value="months">months</option>
-              </select>
-            </span> of work, and I had a
+              </select></span>
+             of work, and I had a
             <span class="styled-select">
               <select name="experience">
                 <option value=""></option>
@@ -66,9 +64,8 @@
                 <option value="good">good</option>
                 <option value="bad">bad</option>
                 <option value="unusually bad">unusually bad</option>
-              </select>
-            </span>
-            experience.
+              </select></span>
+             experience.
           </p>
           <p>I am a
             <span class="styled-select">
@@ -77,12 +74,11 @@
                 <option value="other">other</option>
                 <option value="woman">woman</option>
                 <option value="man">man</option>
-              </select>
-            </span>
-            who has been doing this for <input type="number" name="working_years" class="working_years" /> years.
+              </select></span>
+           who has been doing this for <input type="number" name="working_years" class="working_years" placeholder="6" /> years.
           </p>
           <p>
-            Also: <input type="text" name="also" />
+            Also: <input type="text" name="also" class="also" placeholder="Share details to help others understand your experience." />
           </p>
           <input type="submit" value="Submit" class="submit">
         </form>
