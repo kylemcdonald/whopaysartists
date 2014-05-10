@@ -38,6 +38,7 @@ http.createServer(app).listen(app.get('port'), function(){
 
 app.get('/', function(req, res) {
   storage.all(function(err, data) {
+    shuffle(data);
     res.render('index', {reports: data, thanks: false, errors: {}});
   })
 });
@@ -112,6 +113,7 @@ app.post('/', function(req, res) {
 
   if(errors) {
     storage.all(function(err, data) {
+      shuffle(data);
       res.render('index', {reports: data, thanks: false, errors: errors}); 
     })
   } else {
@@ -120,25 +122,37 @@ app.post('/', function(req, res) {
       // generated
       time_of_month: getTimeOfMonth(date),
       month: date.getMonth(),
-      year: date.getFullYear(),
-      // submitted
-      fee: req.body.fee,
-      currency: req.body.currency,
-      client: (req.body.client),
-      job: req.body.job,
-      where: (req.body.where),
-      time_amount: req.body.time_amount,
-      time_unit: req.body.time_unit,
-      experience: req.body.experience,
-      gender: req.body.gender,
-      working_years: req.body.working_years,
-      also: (req.body.also)
+      year: date.getFullYear()
     };
+    // submitted
+    if(req.body.fee) {
+      addField(report, 'fee', parseInt(req.body.fee));
+      addField(report, 'currency', req.body.currency);
+    }
+    addField(report, 'client', (req.body.client));
+    addField(report, 'job', req.body.job);
+    addField(report, 'where', (req.body.where));
+    if(req.body.time_amount) {
+      addField(report, 'time_amount', parseInt(req.body.time_amount));
+      addField(report, 'time_unit', req.body.time_unit);
+    }
+    addField(report, 'experience', req.body.experience);
+    addField(report, 'gender', req.body.gender);
+    addField(report, 'working_years', parseInt(req.body.working_years));
+    addField(report, 'also', (req.body.also));
+
     storage.insert(report, function() {
       storage.all(function(err, data) {
+        shuffle(data);
         res.render('index', {reports: data, thanks: true, errors: errors});
       });
     });
   }
 });
+
+function addField(object, field, data) {
+  if(data) {
+    object[field] = data;
+  }
+}
 

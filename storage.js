@@ -1,4 +1,6 @@
 var MongoClient = require('mongodb').MongoClient
+, ObjectID = require('mongodb').ObjectID
+, crypto = require('crypto')
 , format = require('util').format
 , _ = require('underscore');
 
@@ -36,6 +38,8 @@ module.exports = function(config) {
 
     //insert person
     storage.insert = function(doc, callback) {
+      // use a hashed objectid to time-anonymize entries
+      doc._id = new ObjectID(crypto.createHash('md5').update(new ObjectID().toString()).digest('hex').substr(0, 24));
       var collection = storage.db.collection('reports');
       collection.insert(doc, function(err, docs) {
         if (err) console.log(err);
