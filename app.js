@@ -97,15 +97,19 @@ app.post('/', function(req, res) {
   req.assert('fee', 'Fee is invalid.').matches(/^\d{0,6}$/);
   req.assert('currency', 'Currency must be one of: ' + currencies.join(',') + '.').isIn(currencies);
   req.assert('client', 'Client is too long.').isLength(0, 80);
-  req.assert('where', 'Where is too long.').isLength(0, 80);
   req.assert('job', 'Job must be one of: ' + jobs.join(',') + '.').isIn(jobs);
+  req.assert('where', 'Where is too long.').isLength(0, 80);
   req.assert('time_amount', 'Time amount is invalid.').matches(/^\d{0,4}$/);
   req.assert('time_unit', 'Time unit must be one of: ' + timeUnits.join(',') + '.').isIn(timeUnits);
   req.assert('experience', 'Experience must be one of: ' + experiences.join(',') + '.').isIn(experiences);
   req.assert('working_years', 'Working years are invalid.').matches(/^\d{0,2}$/);
   req.assert('also', 'Also is too long.').isLength(0, 160);
 
-  var errors = req.validationErrors();  
+  var errors = req.validationErrors();
+  if( !( req.body.fee || req.body.client || req.body.job || req.body.where ) ) {
+    errors = [{msg: 'Please fill out at least one field.'}];
+  }
+
   if(errors) {
     storage.all(function(err, data) {
       res.render('index', {reports: data, thanks: false, errors: errors}); 
@@ -121,8 +125,8 @@ app.post('/', function(req, res) {
       fee: req.body.fee,
       currency: req.body.currency,
       client: (req.body.client),
-      where: (req.body.where),
       job: req.body.job,
+      where: (req.body.where),
       time_amount: req.body.time_amount,
       time_unit: req.body.time_unit,
       experience: req.body.experience,

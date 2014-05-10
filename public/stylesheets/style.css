@@ -130,25 +130,18 @@ select {
   background-color: rgb(215, 100, 0);
 }
 
-#thanks {
-  background: #7D0541;
-  padding: 5px;
-  color: white;
-  font-size: 32px;
-}
-
-ul {
+#learn ul {
   list-style: none;
   padding: 0;
   text-indent: none;
 }
 
-li {
+#learn li {
   margin-bottom: 2em;
   font-size: 28px;
 }
 
-li p {
+#learn li p {
   margin: 0;
 }
 
