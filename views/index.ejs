@@ -1,3 +1,13 @@
+<%
+  function formatAmount(x, y) {
+    if(x == '1') {
+      return x + ' ' + y.slice(0, -1);
+    } else {
+      return x + ' ' + y;
+    }
+  }
+%>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,6 +16,7 @@
     <script type='text/javascript' src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type='text/javascript' src='javascripts/main.js'></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/css3-tips.css' />
   </head>
   <body>
     <div class="wrapper">
@@ -25,9 +36,9 @@
 
       <div id="share" class="section">
         <h2>Share your experience.</h2>
-        <p class="optional">All fields are optional, all submissions are anonymous. Only note your artist fee, sans materials or hired help. If you had multiple jobs for the same event, add them separately. Amount of time is how much time you would have free if you didn't take the job.</p>
+        <p class="optional">All fields are optional, all submissions are anonymous.</p>
         <form name="input" action="./#share" method="post">
-          <p>I was paid <input name="fee" class="fee" placeholder="500" type="number" min="0" max="1000000" step="1" />
+          <p>I was paid <span class="top-tip" data-tips="Only note your artist fee, sans materials or hired help."><input name="fee" class="fee" placeholder="500" type="number" min="0" max="1000000" step="1" /></span>
             <span class="styled-select">
               <select name="currency">
                 <option value="$">$</option>
@@ -35,8 +46,8 @@
                 <option value="£">&pound;</option>
                 <option value="¥">&yen;</option>
               </select></span>
-             by <input type="text" name="client" class="client" placeholder="Eyebeam" maxlength="80" /> for a
-            <span class="styled-select">
+             by <span class="top-tip" data-tips="This is the person, institution, or event that paid you."><input type="text" name="client" class="client" placeholder="Eyebeam" maxlength="80" /></span> for a
+            <span class="styled-select top-tip" data-tips="If you were paid for multiple jobs, add them separately or clarify in 'Also'.">
               <select name="job">
                 <option value=""></option>
                 <option value="workshop">workshop</option>
@@ -49,7 +60,7 @@
               </select></span>
            in <input type="text" name="where" class="where" placeholder="New York" maxlength="80" />.
           </p>
-          <p>It took <input type="number" name="time_amount" class="time_amount" placeholder="2" min="1" max="24" step="1" />
+          <p>It took <span class="top-tip" data-tips="Examples: 3 hour workshop, 45 minute talk/lecture, 14 days teaching, 1 month residency, 3 weeks working on a commission, 2 days installing for an exhibition."><input type="number" name="time_amount" class="time_amount" placeholder="2" min="1" max="24" step="1" /></span>
             <span class="styled-select">
               <select name="time_unit">
                 <option value="hours">hours</option>
@@ -109,7 +120,9 @@
            <li>
 
             <p>I was paid
-              <% if ( reports[i].fee || reports[i].fee == 0) { 
+              <% if ( reports[i].fee == 0 ) { %>
+                  nothing
+              <% } else if ( reports[i].fee ) {
                 if ( reports[i].currency == '$' ) { %>
                  <%= reports[i].currency %><%= reports[i].fee %>
                  <% } else { %>
@@ -129,9 +142,9 @@
             .</p>
 
             <% if ( reports[i].time_amount && reports[i].experience ) { %>
-              <p>It took <%= reports[i].time_amount %> <%= reports[i].time_unit %> of work, and I had a <%= reports[i].experience %> experience.</p>
+              <p>It took <%= formatAmount(reports[i].time_amount, reports[i].time_unit) %> of work, and I had a <%= reports[i].experience %> experience.</p>
             <% } else if ( reports[i].time_amount ) { %>
-              <p>It took <%= reports[i].time_amount %> <%= reports[i].time_unit %> of work.</p>
+              <p>It took <%= formatAmount(reports[i].time_amount, reports[i].time_unit) %> of work.</p>
             <% } else if ( reports[i].experience ) { %>
               <p>I had a <%= reports[i].experience %> experience.</p>
             <% } %>
@@ -141,7 +154,7 @@
             <% } else if ( reports[i].gender ) { %>
               <p>I am a <%= reports[i].gender %>.</p>
             <% } else if ( reports[i].working_years ) { %>
-              <p>I have been doing this for <%= reports[i].working_years %> years.</p>
+              <p>I have been doing this for <%= formatAmount(reports[i].working_years, 'years') %>.</p>
             <% } %>
 
             <% if (reports[i].also) { %>
