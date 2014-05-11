@@ -27,7 +27,7 @@
         <h2>Share your experience.</h2>
         <p class="optional">All fields are optional, all submissions are anonymous. Only note your artist fee, sans materials or hired help. If you had multiple jobs for the same event, add them separately. Amount of time is how much time you would have free if you didn't take the job.</p>
         <form name="input" action="./#share" method="post">
-          <p>I was paid <input type="number" name="fee" class="fee" placeholder="500" />
+          <p>I was paid <input name="fee" class="fee" placeholder="500" type="number" min="0" max="1000000" step="1" />
             <span class="styled-select">
               <select name="currency">
                 <option value="$">$</option>
@@ -35,7 +35,7 @@
                 <option value="£">&pound;</option>
                 <option value="¥">&yen;</option>
               </select></span>
-             by <input type="text" name="client" class="client" placeholder="Eyebeam" /> for a
+             by <input type="text" name="client" class="client" placeholder="Eyebeam" maxlength="80" /> for a
             <span class="styled-select">
               <select name="job">
                 <option value=""></option>
@@ -47,9 +47,9 @@
                 <option value="commission">commission</option>
                 <option value="exhibition">exhibition</option>
               </select></span>
-           in <input type="text" name="where" class="where" placeholder="New York" />.
+           in <input type="text" name="where" class="where" placeholder="New York" maxlength="80" />.
           </p>
-          <p>It took <input type="number" name="time_amount" class="time_amount" placeholder="2" />
+          <p>It took <input type="number" name="time_amount" class="time_amount" placeholder="2" min="1" max="24" step="1" />
             <span class="styled-select">
               <select name="time_unit">
                 <option value="hours">hours</option>
@@ -76,10 +76,10 @@
                 <option value="woman">woman</option>
                 <option value="man">man</option>
               </select></span>
-           who has been doing this for <input type="number" name="working_years" class="working_years" placeholder="6" /> years.
+           who has been doing this for <input type="number" name="working_years" class="working_years" placeholder="6" min="1" max="80" step="1" /> years.
           </p>
           <p>
-            Also: <input type="text" name="also" class="also" placeholder="Share details to help others understand your experience." />
+            Also: <input type="text" name="also" class="also" placeholder="Share details to help others understand your experience." maxlength="500" />
           </p>
           <input type="submit" value="Submit" class="submit">
         </form>
@@ -109,7 +109,7 @@
            <li>
 
             <p>I was paid
-              <% if ( reports[i].fee ) { 
+              <% if ( reports[i].fee || reports[i].fee == 0) { 
                 if ( reports[i].currency == '$' ) { %>
                  <%= reports[i].currency %><%= reports[i].fee %>
                  <% } else { %>

@@ -94,8 +94,16 @@ var timeUnits = ['', 'hours', 'days', 'weeks', 'months'];
 var experiences = ['', 'unusually good', 'good', 'bad', 'unusually bad'];
 var genders = ['', 'other', 'woman', 'man'];
 
+expressValidator.validator.extend('isPositiveOptional', function (str) {
+  if(str && str.length > 0) {
+    return parseInt(str) >= 0;
+  } else {
+    return true;
+  }
+});
+
 app.post('/', function(req, res) {
-  req.assert('fee', 'Fee is invalid.').matches(/^\d{0,6}$/);
+  req.assert('fee', 'Fee is too long or contains non-digits. Try rounding the value.').matches(/^\d{0,8}$/);
   req.assert('currency', 'Currency must be one of: ' + currencies.join(',') + '.').isIn(currencies);
   req.assert('client', 'Client is too long.').isLength(0, 80);
   req.assert('job', 'Job must be one of: ' + jobs.join(',') + '.').isIn(jobs);
@@ -104,7 +112,7 @@ app.post('/', function(req, res) {
   req.assert('time_unit', 'Time unit must be one of: ' + timeUnits.join(',') + '.').isIn(timeUnits);
   req.assert('experience', 'Experience must be one of: ' + experiences.join(',') + '.').isIn(experiences);
   req.assert('working_years', 'Working years are invalid.').matches(/^\d{0,2}$/);
-  req.assert('also', 'Also is too long.').isLength(0, 160);
+  req.assert('also', 'Also is too long.').isLength(0, 500);
 
   var errors = req.validationErrors();
   if( !( req.body.fee || req.body.client || req.body.job || req.body.where ) ) {
@@ -125,16 +133,16 @@ app.post('/', function(req, res) {
       year: date.getFullYear()
     };
     // submitted
-    if(req.body.fee) {
-      addField(report, 'fee', parseInt(req.body.fee));
-      addField(report, 'currency', req.body.currency);
+    if(req.body.fee || req.body.fee == '0') {
+      report.fee = parseInt(req.body.fee);
+      report.currency = req.body.currency;
     }
     addField(report, 'client', (req.body.client));
     addField(report, 'job', req.body.job);
     addField(report, 'where', (req.body.where));
     if(req.body.time_amount) {
-      addField(report, 'time_amount', parseInt(req.body.time_amount));
-      addField(report, 'time_unit', req.body.time_unit);
+      report.time_amount = parseInt(req.body.time_amount);
+      report.time_unit = req.body.time_unit;
     }
     addField(report, 'experience', req.body.experience);
     addField(report, 'gender', req.body.gender);
