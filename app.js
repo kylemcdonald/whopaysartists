@@ -43,12 +43,6 @@ app.get('/', function(req, res) {
   })
 })
 
-app.get('/:id', function(req, res) {
-  storage.get(req.params.id, function(err, data) {
-    res.render('item', {report: data.length ? data[0] : {}, err: err});
-  })
-})
-
 function shuffle(array) {
     var counter = array.length, temp, index;
     while (counter > 0) {
@@ -170,3 +164,8 @@ function addField(object, field, data) {
   }
 }
 
+app.get('/:id', function(req, res) {
+  storage.get(req.params.id, function(err, data) {
+    res.render('item', {report: data.length ? data[0] : {}, err: err});
+  })
+})
