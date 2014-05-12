@@ -1,20 +1,9 @@
-<%
-  function formatAmount(x, y) {
-    if(x == '1') {
-      return x + ' ' + y.slice(0, -1);
-    } else {
-      return x + ' ' + y;
-    }
-  }
-%>
-
 <!DOCTYPE html>
 <html>
   <head>
     <title>Who Pays Artists?</title>
     <link href='http://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
     <script type='text/javascript' src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type='text/javascript' src='javascripts/main.js'></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/css3-tips.css' />
   </head>
@@ -22,7 +11,7 @@
     <div class="wrapper">
 
       <div id="header" class="section">
-        <h1>Who Pays<img src="images/header.png"/>Artists<span class="q">?</span></h1>
+        <a href="./"><h1>Who Pays<img src="../images/header.png"/>Artists<span class="q">?</span></h1></a>
       </div>
 
       <img src="images/top-background.png" class="split"/>
@@ -114,54 +103,9 @@
       <div id="learn" class="section">
         <h2>Learn from the experience of others.</h2>
         <ul>
-        <% var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; %>
-        <% for(var i=0; i<reports.length; i++) { %>
-           <li>
-
-            <p>I was paid
-              <% if ( reports[i].fee == 0 ) { %>
-                  nothing
-              <% } else if ( reports[i].fee ) {
-                if ( reports[i].currency == '$' ) { %>
-                 <%= reports[i].currency %><%= reports[i].fee %>
-                 <% } else { %>
-                 <%= reports[i].fee %><%= reports[i].currency %>
-                 <%
-               }
-              } %>
-              <% if ( reports[i].client ) { %>
-                 by <%= reports[i].client %>
-              <% } %>
-              <% if ( reports[i].job ) { %>
-                 for a <%= reports[i].job %>
-              <% } %>
-              <% if ( reports[i].where ) { %>
-                 in <%= reports[i].where %>
-              <% } %>
-            .</p>
-
-            <% if ( reports[i].time_amount && reports[i].experience ) { %>
-              <p>It took <%= formatAmount(reports[i].time_amount, reports[i].time_unit) %> of work, and I had a <%= reports[i].experience %> experience.</p>
-            <% } else if ( reports[i].time_amount ) { %>
-              <p>It took <%= formatAmount(reports[i].time_amount, reports[i].time_unit) %> of work.</p>
-            <% } else if ( reports[i].experience ) { %>
-              <p>I had a <%= reports[i].experience %> experience.</p>
-            <% } %>
-
-            <% if ( reports[i].gender && reports[i].working_years ) { %>
-              <p>I am a <%= reports[i].gender %> who has been doing this for <%= reports[i].working_years %> years.</p>
-            <% } else if ( reports[i].gender ) { %>
-              <p>I am a <%= reports[i].gender %>.</p>
-            <% } else if ( reports[i].working_years ) { %>
-              <p>I have been doing this for <%= formatAmount(reports[i].working_years, 'years') %>.</p>
-            <% } %>
-
-            <% if (reports[i].also) { %>
-              <p>Also: <%= reports[i].also %></p>
-            <% } %>
-
-            <p class="date">Submitted in <%= reports[i].time_of_month %> <%= monthNames[reports[i].month] %> <%= reports[i].year %></p>
-           </li>
+        <% for(var i=0; i<reports.length; i++) {
+          var report = reports[i]; %>
+          <li><% include ./printItem -%></li>
         <% } %>
         </ul>
       </div>

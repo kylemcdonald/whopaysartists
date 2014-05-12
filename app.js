@@ -41,7 +41,13 @@ app.get('/', function(req, res) {
     shuffle(data);
     res.render('index', {reports: data, thanks: false, errors: {}});
   })
-});
+})
+
+app.get('/:id', function(req, res) {
+  storage.get(req.params.id, function(err, data) {
+    res.render('item', {report: data.length ? data[0] : {}, err: err});
+  })
+})
 
 function shuffle(array) {
     var counter = array.length, temp, index;

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Who Pays Artists?</title>
+    <link href='http://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
+    <script type='text/javascript' src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel='stylesheet' href='../stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="wrapper">
+
+      <div id="header" class="section">
+        <a href="./"><h1>Who Pays<img src="../images/header.png"/>Artists<span class="q">?</span></h1></a>
+      </div>
+
+      <img src="../images/top-background.png" class="split"/>
+
+      <div id="intro" class="section">
+        <% if(err) { %><h2>Sorry, that item doesn't exist.</h2><% } else { %><div><% include ./printItem -%></div><% } %>
+      </div>
+
+    </div>
+
+      <div id="footer">
+        <p>Access all of the data in a single <a href="../data.json">JSON</a> or <a href="../data.csv">CSV</a> file.</a></p>
+        <p><a href="mailto:info@whopaysartists.com" target="_blank">Contact us</a> or contribute on <a href="https://github.com/kylemcdonald/whopaysartists/" target="_blank">GitHub</a></p>
+      </div>
+  </body>
+</html>

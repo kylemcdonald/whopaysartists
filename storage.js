@@ -28,7 +28,7 @@ module.exports = function(config) {
     storage.db = db;
     storage.db.createCollection('reports', function() {
 
-    //find all people
+    // find all docs
     storage.all = function(callback) {
       var collection = storage.db.collection('reports');
       collection.find().toArray(function(err, arr) {
@@ -36,7 +36,20 @@ module.exports = function(config) {
       });
     };
 
-    //insert person
+    // find specific doc
+    storage.get = function(id, callback) {
+      var collection = storage.db.collection('reports');
+      try {
+        var objectId = new ObjectID(id);
+        collection.find(objectId).toArray(function(err, arr) {
+          callback(err, arr);
+        });
+      } catch(e) {
+        callback([e], {});
+      }
+    };    
+
+    // insert doc
     storage.insert = function(doc, callback) {
       // use a hashed objectid to time-anonymize entries
       doc._id = new ObjectID(crypto.createHash('md5').update(new ObjectID().toString()).digest('hex').substr(0, 24));
@@ -47,23 +60,9 @@ module.exports = function(config) {
       });
     };
 
-    // //insert person
-    // storage.reset = function(callback) {
-    //   storage.db.dropCollection('people', callback);
-    // };
-
-    // storage.updateDefaultUsers = function() {
-    //   // initialize default options
-    //   storage.all(function(err, data) {
-    //     storage.default_users = _.map(data, function(obj) { return obj.user; });
-    //   });
-    // };
-
-    //      storage.updateDefaultUsers();
     });
 
   });
-
 
   return storage;
 };

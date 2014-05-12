@@ -1,3 +1,0 @@
-$('#submit').click(function(e){
-  
-});
