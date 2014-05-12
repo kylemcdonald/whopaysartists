@@ -1,50 +1,60 @@
-<p>I was paid
-  <% if ( report.fee == 0 ) { %>
-      nothing
-  <% } else if ( report.fee ) {
-    if ( report.currency == '$' ) { %>
-     <%= report.currency %><%= report.fee %>
-     <% } else { %>
-     <%= report.fee %><%= report.currency %>
-     <%
-   }
-  } %>
-  <% if ( report.client ) { %>
-     by <%= report.client %>
-  <% } %>
-  <% if ( report.job ) { %>
-     for a <%= report.job %>
-  <% } %>
-  <% if ( report.where ) { %>
-     in <%= report.where %>
-  <% } %>
-.</p>
-
-<%
-  if (report.time_amount) {
-    var unit = report.time_amount > 1 ? report.time_unit : report.time_unit.slice(0, -1);
-    %><p>It took <%= report.time_amount %> <%= unit %> of work<%
-    if ( report.experience ) {
-      %>, and I had a <%= report.experience %> experience.</p><%
-    } else {
-      %>.<%
-    }
-  } else if ( report.experience ) {
-    %><p>I had a <%= report.experience %> experience.</p><%
+<p>I was paid<%
+if ( report.fee == 0 ) { 
+      %> nothing<%
+} else if ( report.fee ) {
+  if ( report.currency == '$' ) {
+   %> <%= report.currency %><%= report.fee %><%
+   } else {
+   %> <%= report.fee %><%= report.currency %><%
+ }
+}
+if ( report.client ) {
+  %> by <%= report.client %><%
+}
+if ( report.job ) {
+  %> for a <%= report.job %><%
+}
+if ( report.where ) {
+  %> in <%= report.where %><%
+}
+%>.</p><%
+if (report.time_amount) {
+  var unit = report.time_amount > 1 ? report.time_unit : report.time_unit.slice(0, -1);
+  %><p>It took <%= report.time_amount %> <%= unit %> of work<%
+  if ( report.experience ) {
+    %>, and I had a <%= report.experience %> experience.</p><%
+  } else {
+    %>.<%
   }
-%>
+} else if ( report.experience ) {
+  %><p>I had a <%= report.experience %> experience.</p><%
+}
 
-<% if ( report.gender && report.working_years ) { %>
-  <p>I am a <%= report.gender %> who has been doing this for <%= report.working_years %> years.</p>
-<% } else if ( report.gender ) { %>
-  <p>I am a <%= report.gender %>.</p>
-<% } else if ( report.working_years ) { %>
-  <p>I have been doing this for <%= report.working_years %> <%= report.working_years > 1 ? 'years' : 'year' %>.</p>
-<% } %>
+var hasGender = report.gender && report.gender != 'person';
+var hasWorkingYears = report.working_years || report.working_years == 0;
+if ( hasGender ) {
+  %><p>I am a <%= report.gender %><%
+}
+if ( hasWorkingYears ) {
+  if (!hasGender) { 
+    %><p>I have<%
+  } else {
+    %> who has<%
+  }
+  %> been doing this for<%
+  if(report.working_years == 0) {
+    %> less than a year<%
+  } else {
+    %> <%= report.working_years %> <%= report.working_years > 1 ? 'years' : 'year' %><%
+  }
+  %>.</p><%
+} else if( hasGender ) {
+  %>.</p><%
+}
 
-<% if (report.also) { %>
-  <p>Also: <%= report.also %></p>
-<% } %>
+if (report.also) {
+  %><p>Also: <%= report.also %></p><%
+}
 
-<% var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; %>
+var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; %>
 <p class="date"><a href="<%= report._id %>">Submitted in <%= report.time_of_month %> <%= monthNames[report.month] %> <%= report.year %></a></p>

@@ -173,6 +173,6 @@ select {
 }
 
 a, a:hover, a:link, a:visited {
-  color: rgb(239, 113, 0);
+  color: rgb(215, 100, 0);
   cursor: pointer;
 }

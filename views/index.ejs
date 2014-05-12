@@ -52,6 +52,7 @@
           <p>It took <span class="top-tip" data-tips="Examples: 3 hour workshop, 45 minute talk/lecture, 14 days teaching, 1 month residency, 3 weeks working on a commission, 2 days installing for an exhibition."><input type="number" name="time_amount" class="time_amount" placeholder="2" min="1" max="24" step="1" /></span>
             <span class="styled-select">
               <select name="time_unit">
+                <option value="minutes">minutes</option>
                 <option value="hours">hours</option>
                 <option value="days" selected="selected">days</option>
                 <option value="weeks">weeks</option>
@@ -75,7 +76,7 @@
                 <option value="woman">woman</option>
                 <option value="man">man</option>
               </select></span>
-           who has been doing this for <input type="number" name="working_years" class="working_years" placeholder="6" min="1" max="80" step="1" /> years.
+           who has been doing this for <input type="number" name="working_years" class="working_years" placeholder="6" min="0" max="80" step="1" /> years.
           </p>
           <p>
             Also: <input type="text" name="also" class="also" placeholder="Share details to help others understand your experience." maxlength="500" />

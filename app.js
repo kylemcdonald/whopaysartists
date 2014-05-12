@@ -165,7 +165,7 @@ app.post('/', function(req, res) {
 });
 
 function addField(object, field, data) {
-  if(data) {
+  if(data || data == 0) {
     object[field] = data;
   }
 }
