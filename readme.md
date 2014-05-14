@@ -13,11 +13,11 @@ Because there is so much interest, make sure to comment that you are working to 
 
 The easiest way to install these three dependancies is with Homebrew:
 
-```$ brew update```
-
-```$ brew install node # npm comes baked into node```
-
-```$ brew install mongodb```
+```
+$ brew update
+$ brew install node # npm comes baked into node
+$ brew install mongodb
+```
 
 ## Getting setup
 
