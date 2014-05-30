@@ -88,11 +88,11 @@ function getTimeOfMonth(date) {
   }
 }
 
-var currencies = ['$', '€', '£', '¥'];
-var jobs = ['', 'workshop', 'talk/lecture', 'teaching position', 'residency', 'grant', 'commission', 'exhibition'];
-var timeUnits = ['', 'hours', 'days', 'weeks', 'months'];
+var currencies = ['USD', 'EUR', 'GBP', 'JPY'];
+var jobs = ['', 'workshop', 'talk/lecture', 'teaching position', 'residency', 'grant', 'commission', 'exhibition', 'performance'];
+var timeUnits = ['minutes', 'hours', 'days', 'weeks', 'months'];
 var experiences = ['', 'unusually good', 'good', 'bad', 'unusually bad'];
-var genders = ['', 'other', 'woman', 'man'];
+var genders = ['person', 'woman', 'man'];
 
 expressValidator.validator.extend('isPositiveOptional', function (str) {
   if(str && str.length > 0) {
@@ -111,6 +111,7 @@ app.post('/', function(req, res) {
   req.assert('time_amount', 'Time amount is invalid.').matches(/^\d{0,4}$/);
   req.assert('time_unit', 'Time unit must be one of: ' + timeUnits.join(',') + '.').isIn(timeUnits);
   req.assert('experience', 'Experience must be one of: ' + experiences.join(',') + '.').isIn(experiences);
+  req.assert('gender', 'Gender must be one of: ' + genders.join(',') + '.').isIn(genders);
   req.assert('working_years', 'Working years are invalid.').matches(/^\d{0,2}$/);
   req.assert('also', 'Also is too long.').isLength(0, 500);
 

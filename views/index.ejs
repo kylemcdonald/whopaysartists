@@ -18,7 +18,7 @@
 
       <div id="intro" class="section">
         <h2>Making a living as an artist can be hard.</h2>
-        <p>You never know how much to ask for. Discussions about money are taboo because we pretend that passion and creativity alone should pay the bills. Some of the best events have “no budget”, and the worst events can make a career as an artist look sustainable. Let’s help each other sort through some of the confusion, and develop an ongoing dialogue about how artists, especially media artists, make money.</p>
+        <p>You never know how much to ask for. Discussions about money are taboo because we pretend that passion and creativity alone should pay the bills. Some of the best events have “no budget”, and sometimes only the worst events can make a career as an artist look painfully sustainable. Let’s help each other sort through some of the confusion, and develop an ongoing dialogue about how artists make money.</p>
       </div>
 
       <img src="images/white-background.png" class="split"/>
@@ -28,24 +28,25 @@
         <p class="optional">All fields are optional, all submissions are anonymous.</p>
         <form name="input" action="./#share" method="post">
           <p>I was paid <span class="top-tip" data-tips="Only note your artist fee, sans materials or hired help."><input name="fee" class="fee" placeholder="500" type="number" min="0" max="1000000" step="1" /></span>
-            <span class="styled-select">
+            <span class="styled-select top-tip" data-tips="These are the four most commonly traded reserve currencies, please convert other currencies to one of these.">
               <select name="currency">
-                <option value="$">$</option>
-                <option value="€">&euro;</option>
-                <option value="£">&pound;</option>
-                <option value="¥">&yen;</option>
+                <option value="USD">$</option>
+                <option value="EUR">&euro;</option>
+                <option value="GBP">&pound;</option>
+                <option value="JPY">&yen;</option>
               </select></span>
              by <span class="top-tip" data-tips="This is the person, institution, or event that paid you."><input type="text" name="client" class="client" placeholder="Eyebeam" maxlength="80" /></span> for a
             <span class="styled-select top-tip" data-tips="If you were paid for multiple jobs, add them separately or clarify in 'Also'.">
               <select name="job">
                 <option value=""></option>
-                <option value="workshop">workshop</option>
-                <option value="talk/lecture">talk/lecture</option>
-                <option value="teaching position">teaching position</option>
-                <option value="residency">residency</option>
-                <option value="grant">grant</option>
                 <option value="commission">commission</option>
                 <option value="exhibition">exhibition</option>
+                <option value="grant">grant</option>
+                <option value="performance">performance</option>
+                <option value="residency">residency</option>
+                <option value="talk/lecture">talk/lecture</option>
+                <option value="teaching position">teaching position</option>
+                <option value="workshop">workshop</option>
               </select></span>
            in <input type="text" name="where" class="where" placeholder="New York" maxlength="80" />.
           </p>

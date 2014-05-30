@@ -2,11 +2,9 @@
 if ( report.fee == 0 ) { 
       %> nothing<%
 } else if ( report.fee ) {
-  if ( report.currency == '$' ) {
-   %> <%= report.currency %><%= report.fee %><%
-   } else {
-   %> <%= report.fee %><%= report.currency %><%
- }
+  var currencySymbols = {'USD': '$', 'EUR': '€', 'GBP': '£', 'JPY': '¥'};
+  var currencySymbol = currencySymbols[report.currency];
+  %> <%= currencySymbol %><%= report.fee %><%
 }
 if ( report.client ) {
   %> by <%= report.client %><%
