@@ -4,7 +4,16 @@
     <title>Who Pays Artists?</title>
     <link href='http://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
     <script type='text/javascript' src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <link rel='stylesheet' href='../stylesheets/style.css' />
+    <script type='text/javascript' src="javascript/printReport.js"></script>
+<% if(!err) { %>
+    <script type='text/javascript'>
+    var report = <%- JSON.stringify(report) %>;
+    $(document).ready(function(){
+      $('#intro').append(printReport(report));
+    })
+    </script>
+<% } %>
+    <link rel='stylesheet' href='stylesheets/style.css' />
   </head>
   <body>
     <div class="wrapper">
@@ -16,7 +25,7 @@
       <img src="../images/top-background.png" class="split"/>
 
       <div id="intro" class="section">
-        <% if(err) { %><h2>Sorry, that item doesn't exist.</h2><% } else { %><div><% include ./printItem -%></div><% } %>
+        <% if(err) { %><h2>Sorry, that item doesn't exist.</h2><% } %>
       </div>
 
     </div>

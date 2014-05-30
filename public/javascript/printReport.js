@@ -15,7 +15,7 @@ function printReport(report) {
 	out += '.</p>';
 
 	if(report.time_amount) {
-		var unit = report.time_amount > 1 ? report.time_unit : report.time_unit.slice(0, -1);
+		var unit = (report.time_amount > 1 ? report.time_unit : report.time_unit.slice(0, -1));
 		out += '<p>It took ' + report.time_amount + ' ' + unit + ' of work';
 		if(report.experience) {
 			out += ', and I had a ' + report.experience + ' experience';
@@ -31,12 +31,12 @@ function printReport(report) {
 		out += '<p>I am a ' + report.gender;
 	}
 	if(hasWorkingYears) {
-		out += hasGender ? ' who has' : '<p>I have';
+		out += (hasGender ? ' who has' : '<p>I have');
 		out += ' been doing this for';
 		if(report.working_years == 0) {
 			out += ' less than a year';
 		} else {
-			out += ' ' + report.working_years + ' ' + report.working_years > 1 ? 'years' : 'year';
+			out += ' ' + report.working_years + ' ' + (report.working_years > 1 ? 'years' : 'year');
 		}
 		out += '.</p>';
 	} else if(hasGender) {
