@@ -157,6 +157,12 @@ select {
   cursor: pointer;
 }
 
+#showall {
+  font-style: italic;
+  text-decoration: underline;
+  text-align: center;
+}
+
 .date {
   font-size: 20px;
   font-style: italic;

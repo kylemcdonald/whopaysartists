@@ -6,14 +6,24 @@
     <script type='text/javascript' src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type='text/javascript' src="javascript/printReport.js"></script>
     <script>
-      $.getJSON('data.json', function(data) {
-        $(document).ready(function(){
-          var reports = $('#reports');
-          data.forEach(function(report) {
-            reports.append("<li>" + printReport(report) + "</li>");
-          })
-        })
+    function loadSome(data, count) {
+      var reports = $('#reports');
+      for(var i = 0; i < count && data.length; i++) {
+        reports.append("<li>" + printReport(data.pop()) + "</li>");
+      }
+      if(!data.length) {
+        $('#showall').hide();
+      }
+    }
+    $.getJSON('data.json', function(data) {
+      $(document).ready(function(){
+        $('#learn').append('<a><p id="showall">Show all</p></a>');
+        loadSome(data, 10); // load 10 initially
+        $('#showall').click(function(){
+          loadSome(data, data.length);
+        });
       })
+    })
     </script>
     <link rel='stylesheet' href='stylesheets/style.css' />
     <link rel='stylesheet' href='stylesheets/css3-tips.css' />
