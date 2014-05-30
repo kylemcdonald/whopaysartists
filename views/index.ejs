@@ -4,6 +4,17 @@
     <title>Who Pays Artists?</title>
     <link href='http://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
     <script type='text/javascript' src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type='text/javascript' src="javascript/printReport.js"></script>
+    <script>
+      $.getJSON('data.json', function(data) {
+        $(document).ready(function(){
+          var reports = $('#reports');
+          data.forEach(function(report) {
+            reports.append("<li>" + printReport(report) + "</li>");
+          })
+        })
+      })
+    </script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/css3-tips.css' />
   </head>
@@ -30,7 +41,7 @@
           <p>I was paid <span class="top-tip" data-tips="Only note your artist fee, sans materials or hired help."><input name="fee" class="fee" placeholder="500" type="number" min="0" max="1000000" step="1" /></span>
             <span class="styled-select top-tip" data-tips="These are the four most commonly traded reserve currencies, please convert other currencies to one of these.">
               <select name="currency">
-                <option value="USD">$</option>
+                <option value="USD">&dollar;</option>
                 <option value="EUR">&euro;</option>
                 <option value="GBP">&pound;</option>
                 <option value="JPY">&yen;</option>
@@ -104,11 +115,13 @@
 
       <div id="learn" class="section">
         <h2>Learn from the experience of others.</h2>
-        <ul>
+        <ul id="reports">
+
         <% for(var i=0; i<reports.length; i++) {
           var report = reports[i]; %>
-          <li><% include ./printItem -%></li>
+          <!--<li><% include ./printItem -%></li>-->
         <% } %>
+
         </ul>
       </div>
     </div>
