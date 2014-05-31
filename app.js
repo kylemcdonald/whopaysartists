@@ -56,38 +56,25 @@ function shuffle(array) {
     return array;
 }
 
-var fields = ["time_of_month", "month", "year", "fee", "currency", "client", "where", "job", "time_amount", "time_unit", "experience", "gender", "working_years", "also"];
-var fieldNames = ["Time of month", "Month", "Year", "Fee", "Currency", "Client", "Where", "Job", "Time amount", "Time unit", "Experience", "Gender", "Working years", "Also"];
-function updateCache() {
+var fields = ["time_of_month", "month", "year", "fee", "currency", "client", "where", "job", "time_amount", "time_unit", "medium", "experience", "gender", "working_years", "also"];
+var fieldNames = ["Time of month", "Month", "Year", "Fee", "Currency", "Client", "Where", "Job", "Time amount", "Time unit", "Medium", "Experience", "Gender", "Working years", "Also"];
+
+app.get('/data.csv', function(req, res) {
   storage.all(function(err, data) {
     shuffle(data);
-    fs.writeFile('cache/data.json', JSON.stringify(data), function() {});
     json2csv({data: data, fields: fields, fieldNames: fieldNames}, function(err, csv) {
-      fs.writeFile('cache/data.csv', csv, function() {});
+      res.attachment('data.csv');
+      res.set('Content-type', 'text/csv');
+      res.send(csv);
     })
   })
-}
-
-app.get('/update', function(req, res) {
-  updateCache();
-  res.set('Content-type', 'text');
-  res.send('Cache updated.');
 })
 
 app.get('/data.json', function(req, res) {
-  fs.readFile('cache/data.json', function(err, data) {
-    if(err) updateCache();
+  storage.all(function(err, data) {
+    shuffle(data);
     res.attachment('data.json');
     res.set('Content-type', 'application/json');
-    res.send(data);
-  })
-})
-
-app.get('/data.csv', function(req, res) {
-  fs.readFile('cache/data.csv', function(err, data) {
-    if(err) updateCache();
-    res.attachment('data.csv');
-    res.set('Content-type', 'text/csv');
     res.send(data);
   })
 })
