@@ -22,8 +22,7 @@
         // setup autocomplete
         ["client", "where"].forEach(function(x) {
           $('#'+x).autocomplete({
-              lookup: _.compact(_.pluck(data, x)),
-              lookupLimit: 10
+              lookup: _.compact(_.pluck(data, x))
           });
         });
 
