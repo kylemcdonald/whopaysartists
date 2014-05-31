@@ -125,12 +125,12 @@ select {
   cursor: pointer;
 }
 
-.fee{width: 3em;}
-.client{width: 150px}
-.where{width: 100px;}
-.time_amount{width: 50px;}
-.working_years {width: 2em;}
-.also {width: 20em;}
+#fee{width: 3em;}
+#client{width: 150px}
+#where{width: 100px;}
+#time_amount{width: 50px;}
+#working_years {width: 2em;}
+#also {width: 20em;}
 
 #learn {
   color: white;
@@ -181,4 +181,28 @@ select {
 a, a:hover, a:link, a:visited {
   color: rgb(215, 100, 0);
   cursor: pointer;
+}
+
+.autocomplete-suggestions {
+  font-size: 20px;
+  border: 1px solid #999;
+  background: #FFF;
+  cursor: default;
+  overflow: auto;
+
+  border-radius: 10px;
+  border: 2px solid rgb(215, 215, 215);
+  box-shadow: inset 0 5px 5px rgba(0, 0, 0, .1);
+}
+.autocomplete-suggestion {
+  padding: 2px 5px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.autocomplete-selected {
+  background: #F0F0F0;
+}
+.autocomplete-suggestions strong {
+  font-weight: normal;
+  color: rgb(215, 100, 0);
 }
