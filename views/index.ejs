@@ -20,7 +20,7 @@
     $.getJSON('data.json', function(data) {
       $(document).ready(function(){
         // setup autocomplete
-        ["client", "where"].forEach(function(x) {
+        ["client", "where", "medium"].forEach(function(x) {
           $('#'+x).autocomplete({
               lookup: _.uniq(_.compact(_.pluck(data, x)))
           });
@@ -28,9 +28,9 @@
 
         // transform into reports
         $('#learn').append('<a><p id="showall">Show all</p></a>');
-        // loadSome(data, 10); // load 10 initially
+        loadSome(data, 10); // load 10 initially
         $('#showall').click(function(){
-          // loadSome(data, data.length);
+          loadSome(data, data.length);
         });
       })
     })
