@@ -7,7 +7,7 @@
     <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
     <script type='text/javascript' src="javascript/printReport.js"></script>
     <script type='text/javascript' src="javascript/jquery.autocomplete.min.js"></script>
-    <script>
+    <script type='text/javascript'>
     function loadSome(data, count) {
       var reports = $('#reports');
       for(var i = 0; i < count && data.length; i++) {
@@ -119,7 +119,7 @@
 
         <% if (thanks) { %>
           <div id="thanks">
-          Thanks for sharing! Your job has been anonymously added to the database.
+          Thanks for sharing! Your job has been <a href="<%= reportId %>">anonymously added</a> to the database.
           </div>
         <% } %>
         <% if (errors) { %>

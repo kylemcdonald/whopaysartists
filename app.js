@@ -152,10 +152,10 @@ app.post('/', function(req, res) {
     addField(report, 'working_years', parseInt(req.body.working_years));
     addField(report, 'also', (req.body.also));
 
-    storage.insert(report, function() {
+    storage.insert(report, function(doc) {
       storage.all(function(err, data) {
         shuffle(data);
-        res.render('index', {reports: data, thanks: true, errors: errors});
+        res.render('index', {reports: data, thanks: true, reportId: doc._id, errors: errors});
       });
     });
   }

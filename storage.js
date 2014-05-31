@@ -56,7 +56,7 @@ module.exports = function(config) {
       var collection = storage.db.collection('reports');
       collection.insert(doc, function(err, docs) {
         if (err) console.log(err);
-        callback(docs);
+        callback(doc, docs);
       });
     };
 
