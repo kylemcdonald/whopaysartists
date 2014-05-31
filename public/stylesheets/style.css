@@ -129,7 +129,8 @@ select {
 #client{width: 150px}
 #where{width: 100px;}
 #time_amount{width: 50px;}
-#working_years {width: 2em;}
+#medium{width: 150px;}
+#working_years {width: 50px;}
 #also {width: 20em;}
 
 #learn {

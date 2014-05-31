@@ -26,20 +26,26 @@ function printReport(report) {
 	}
 
 	var hasGender = report.gender && report.gender != 'person';
+	var hasMedium = Boolean(report.medium);
 	var hasWorkingYears = report.working_years || report.working_years == 0;
-	if(hasGender) {
-		out += '<p>I am a ' + report.gender;
-	}
-	if(hasWorkingYears) {
-		out += (hasGender ? ' who has' : '<p>I have');
-		out += ' been doing this for';
-		if(report.working_years == 0) {
-			out += ' less than a year';
-		} else {
-			out += ' ' + report.working_years + ' ' + (report.working_years > 1 ? 'years' : 'year');
+	if(hasGender || hasMedium || hasWorkingYears) {
+		out += '<p>I';
+		if(hasGender) {
+			out += ' am a ' + report.gender;
+			if(hasMedium || hasWorkingYears) {
+				out += ', and';
+			}
 		}
-		out += '.</p>';
-	} else if(hasGender) {
+		if(hasWorkingYears) {
+			out += ' have been doing ' + (hasMedium ? report.medium : 'this' + ' for');
+			if(report.working_years == 0) {
+				out += ' less than a year';
+			} else {
+				out += ' ' + report.working_years + ' ' + (report.working_years > 1 ? 'years' : 'year');
+			}
+		} else if(hasMedium) {
+			out += ' do ' + report.medium;
+		}
 		out += '.</p>';
 	}
 

@@ -110,6 +110,7 @@ app.post('/', function(req, res) {
   req.assert('where', 'Where is too long.').isLength(0, 80);
   req.assert('time_amount', 'Time amount is invalid.').matches(/^\d{0,4}$/);
   req.assert('time_unit', 'Time unit must be one of: ' + timeUnits.join(',') + '.').isIn(timeUnits);
+  req.assert('medium', 'Medium is too long.').isLength(0, 80);
   req.assert('experience', 'Experience must be one of: ' + experiences.join(',') + '.').isIn(experiences);
   req.assert('gender', 'Gender must be one of: ' + genders.join(',') + '.').isIn(genders);
   req.assert('working_years', 'Working years are invalid.').matches(/^\d{0,2}$/);
@@ -147,6 +148,7 @@ app.post('/', function(req, res) {
     }
     addField(report, 'experience', req.body.experience);
     addField(report, 'gender', req.body.gender);
+    addField(report, 'medium', req.body.medium);
     addField(report, 'working_years', parseInt(req.body.working_years));
     addField(report, 'also', (req.body.also));
 
