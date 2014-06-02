@@ -91,7 +91,7 @@ function getTimeOfMonth(date) {
 }
 
 var currencies = ['USD', 'EUR', 'GBP', 'JPY'];
-var jobs = ['', 'workshop', 'talk/lecture', 'teaching position', 'residency', 'grant', 'commission', 'exhibition', 'performance'];
+var jobs = ['', 'workshop', 'talk/lecture', 'panel', 'teaching position', 'residency', 'grant', 'commission', 'exhibition', 'performance'];
 var timeUnits = ['minutes', 'hours', 'days', 'weeks', 'months'];
 var experiences = ['', 'unusually good', 'good', 'bad', 'unusually bad'];
 var genders = ['person', 'woman', 'man'];
@@ -154,6 +154,10 @@ app.post('/', function(req, res) {
     addField(report, 'working_years', parseInt(req.body.working_years));
     addField(report, 'also', (req.body.also));
 
+    // ignore a few things
+    ignoreField(report, 'medium', 'art');
+    ignoreField(report, 'medium', 'this');
+
     storage.insert(report, function(doc) {
       storage.all(function(err, data) {
         shuffle(data);
@@ -166,6 +170,12 @@ app.post('/', function(req, res) {
 function addField(object, field, data) {
   if(data || data == 0) {
     object[field] = data;
+  }
+}
+
+function ignoreField(object, field, data) {
+  if(object[field] && object[field] == data) {
+    delete object[field];
   }
 }
 
