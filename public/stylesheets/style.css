@@ -18,6 +18,10 @@ body {
   margin: 0;
 }
 
+#intro p {
+  margin: 0;
+}
+
 h2{
    font-family: "Open Sans Condensed";
    font-size: 38px;
