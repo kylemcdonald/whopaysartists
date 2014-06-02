@@ -168,7 +168,10 @@ app.post('/', function(req, res) {
 });
 
 function addField(object, field, data) {
-  if(data || data == 0) {
+  // a string with length > 0
+  // or a number that is 0 or greater
+  if((typeof data == 'string' && data.length > 0) ||
+    (typeof data == 'number' && data >= 0)) {
     object[field] = data;
   }
 }
