@@ -1,0 +1,17 @@
+@import url("vendor/normalize.css");
+
+#fees {
+  padding: 1em;
+}
+
+#fees svg {
+  width: 100%;
+  height: 200px;
+  border-left: 1px solid #333;
+  border-right: 1px solid #333;
+}
+
+#fees svg circle {
+  fill: rgba( 0, 0, 0, 0.1 );
+  stroke: rgba( 255, 0, 255, 0.7 );
+}
