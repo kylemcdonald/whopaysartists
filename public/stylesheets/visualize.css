@@ -7,6 +7,8 @@
 body {
   font-family: Roboto, sans-serif;
   font-weight: 400;
+  max-width: 1140px;
+  margin: auto;
 }
 
 h1, h2 {
@@ -14,37 +16,37 @@ h1, h2 {
   text-align: center;
 }
 
-#fees {
+#fee-bubbles {
   padding: 1em;
 }
 
-#fees svg {
+#fee-bubbles svg {
   width: 100%;
   height: 80vh;
   shape-rendering: geometricPrecision;
 }
 
-#fees svg circle {
+#fee-bubbles svg circle {
   fill-opacity: 0;
   stroke-opacity: 0.2;
 }
 
-#fees svg .client text {
+#fee-bubbles svg .client text {
   visibility: hidden;
 }
 
-#fees svg g.client:hover {
+#fee-bubbles svg g.client:hover {
   cursor: pointer;
 }
-#fees svg g.client:hover circle {
+#fee-bubbles svg g.client:hover circle {
   stroke-opacity: 0.5;
 }
 
-#fees svg g.client:hover text {
+#fee-bubbles svg g.client:hover text {
   visibility: visible;
 }
 
-#fees svg text.name {
+#fee-bubbles svg text.name {
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -59,4 +61,67 @@ svg .axis text, svg .axis-label {
   font-family: Roboto, sans-serif;
   font-weight: 300;
   font-size: 11px;
+}
+
+#client-bars {
+   -webkit-column-count: 4;
+      -moz-column-count: 4;
+           column-count: 4;
+  -webkit-column-gap: 10px;
+     -moz-column-gap: 10px;
+          column-gap: 10px;
+}
+#client-bars .client {
+  margin-bottom: 14px;
+-webkit-column-break-inside: avoid;
+          page-break-inside: avoid;
+               break-inside: avoid;
+}
+#client-bars .client:after {
+   content: ".";
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+
+#client-bars h4 {
+  margin: 0; padding: 0;
+}
+
+#client-bars .key, #client-bars .bars {
+  font-size: 10px;
+  font-weight: 100;
+  float: left;
+}
+#client-bars .key {
+  width: 20%;
+}
+#client-bars .bars {
+  width: 80%;
+}
+
+
+
+div.bar {
+  height: 12px;
+}
+
+div.bar .label {
+  height: 100%;
+  font-size: 10px;
+  font-weight: 300;
+  padding: 1px 3px;
+}
+
+
+div.bar.avg-fee {
+  background-color: #BAF9FC;
+}
+div.bar.num-fees {
+  background-color: #FFBCBC;
+}
+div.bar.experience {
+  background-color: #FFE9BC;
 }

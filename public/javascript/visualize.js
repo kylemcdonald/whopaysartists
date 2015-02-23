@@ -169,10 +169,10 @@
       }
     },
 
-    drawFees: {
+    drawFeeBubbles: {
       value: function( data ) {
         var width = 1000, height = 1000, margin = width * 0.075;
-        var svg = d3.select( "#fees" )
+        var svg = d3.select( "#fee-bubbles" )
           .append( "svg" )
           .attr( "viewBox", "0 0 "+width+" "+height );
 
@@ -269,12 +269,58 @@
       }
     },
 
+    drawClientBars: {
+      value: function( data ) {
+        var clientBars = d3.select( "#client-bars" );
+
+        var clients = clientBars.selectAll( "div.client" )
+          .data( data.clients )
+          .enter()
+            .append( "div" )
+            .attr( "class", "client" );
+
+        clients.append( "h4" )
+          .text( function( d ) { return d.name; } );
+
+        var key = clients.append( "div" )
+          .attr( "class", "key" );
+        key.append( "div" ).text( "AVG FEE:" );
+        key.append( "div" ).text( "NUM FEES:" );
+        key.append( "div" ).text( "AVG EXP:" );
+
+        var bars = clients.append( "div" )
+          .attr( "class", "bars" );
+
+        bars.append( "div" )
+          .attr( "class", "bar avg-fee" )
+          .attr( "style", function( d ) { return "width: " + (d.avgFee / data.clientMaxAvg * 100) + "%"; } )
+          .append( "div" )
+            .attr( "class", "label" )
+            .text( function( d ) { return Math.round( d.avgFee ) + this.targetCurrency; }.bind( this ) )
+        ;
+
+        bars.append( "div" )
+          .attr( "class", "bar num-fees" )
+          .attr( "style", function( d ) { return "width: " + (d.numFees / data.clientMaxNum * 100) + "%"; } )
+          .append( "div" )
+            .attr( "class", "label" )
+            .text( function( d ) { return d.numFees; } )
+        ;
+
+        bars.append( "div" )
+          .attr( "class", "bar experience" )
+          .attr( "style", function( d ) { return "width: " + ((d.avgExperience + 2) / 4) * 100 + "%"; } )
+        ;
+      }
+    },
+
     visualize: {
       value: function() {
         if ( !( this.isDataReady && this.isRatesReady && this.isDomReady ) ) return;
 
         var data = this.massageData( this.data );
-        this.drawFees( data );
+        this.drawFeeBubbles( data );
+        this.drawClientBars( data );
       }
     }
   } );
