@@ -1,4 +1,8 @@
 (function( $, d3 ) {
+  function formatCSSClass( string ) {
+    return string.toLowerCase().replace( /\s+/g, '-' )
+  }
+
   function ClientDatum( name ) {
     this.name = name;
     this.fees = [];
@@ -158,7 +162,8 @@
           clientMaxNum: Number.MIN_VALUE,
           clientMinNum: Number.MAX_VALUE,
           clientMaxSum: Number.MIN_VALUE,
-          clientMinSum: Number.MAX_VALUE
+          clientMinSum: Number.MAX_VALUE,
+          raw: data
         } );
 
         var extent = d3.extent( out.clients, function( d ) { return d.avgFee; } );
@@ -171,14 +176,15 @@
 
     drawFeeBubbles: {
       value: function( data ) {
-        var width = 1000, height = 1000, margin = width * 0.075;
         var svg = d3.select( "#fee-bubbles" )
-          .append( "svg" )
-          .attr( "viewBox", "0 0 "+width+" "+height );
+          .append( "svg" );
+
+        $svg = $( "#fee-bubbles svg" );
+        var width = $svg.width(), height = $svg.height(), margin = width * 0.12;
 
         var scale_r = d3.scale.linear()
           .domain( [ data.minFee, data.maxFee ] )
-          .range( [ width * 0.01, width * 0.1 ] )
+          .range( [ 5, width * 0.1 ] )
           .clamp( true );
 
         var scale_x = d3.scale.linear()
@@ -189,11 +195,7 @@
           .domain( [ 2, -2 ] )
           .rangeRound( [ 0 + margin, height - margin ] );
 
-        var scale_c = d3.scale.category20();
-
-        var scale_textPlacement = d3.scale.linear()
-          .domain( [ 0, 1 ] )
-          .range( [ 0, 18 ] );
+        var scale_c = d3.scale.category10();
 
         var axis_x = d3.svg.axis()
           .scale( scale_x )
@@ -205,8 +207,7 @@
           .orient( "left" )
           .ticks( 5 );
 
-        var axisMargin = margin * 0.5;
-        var labelOffset = 30;
+        var axisMargin = margin * 0.8;
         svg.append( "g" )
           .attr( "class", "axis" )
           .attr( "transform", "translate( 0,"+(height-axisMargin)+" )" )
@@ -215,7 +216,7 @@
           .attr( "class", "axis-label" )
           .attr( "text-anchor", "middle" )
           .attr( "x", width * 0.8 )
-          .attr( "y", height - axisMargin + labelOffset )
+          .attr( "y", height - axisMargin + 40 )
           .text( "average fee in " + this.targetCurrency );
 
         svg.append( "g" )
@@ -227,7 +228,7 @@
           .attr( "text-anchor", "middle" )
           .attr( "transform", "rotate(-90)" )
           .attr( "x", -width * 0.2 )
-          .attr( "y", axisMargin - labelOffset )
+          .attr( "y", axisMargin - 30 )
           .text( "average quality of experience" );
 
         var g = svg.selectAll( "g.client" )
@@ -235,16 +236,10 @@
           .enter()
             .append( "g" )
             .attr( "class", "client" )
+            .attr( "data-client-name", function( d ) { return d.name; } )
             .attr( "transform", function( d ) {
               return "translate(" + scale_x( d.avgFee ) + "," + scale_y( d.avgExperience ) + ")";
             } )
-        ;
-
-        g.append( "text" )
-          .attr( "class", "name" )
-          .attr( "x", 0 )
-          .attr( "y", -20 )
-          .text( function( d ) { return d.name; } )
         ;
 
         g.selectAll( "circle" )
@@ -258,14 +253,20 @@
            .attr( "cy", 0 )
         ;
 
-        g.selectAll( "text.fees" )
-          .data( function( d ) { return d.fees; } )
-          .enter()
-            .append( "text" )
-            .attr( "class", "fees" )
-            .attr( "x", 0 )
-            .attr( "y", function( d, i ) { return scale_textPlacement( i ); } )
-            .text( function( d ) { return d + this.targetCurrency; }.bind( this ) );
+        g.append( "text" )
+          .attr( "class", "name" )
+          .attr( "x", 10 )
+          .attr( "y", 6 )
+          .text( function( d ) { return d.name; } )
+        ;
+
+        $svg.find( "g.client" ).on( "click", function( event ) {
+          var client = $( event.target ).closest( "g" ).data( "client-name" ) || "unknown";
+          var klass = "client-" + formatCSSClass( client );
+          $( "#learn #reports" ).removeClass( "all-shown" );
+          $( "#learn #reports li" ).hide();
+          $( "#learn #reports ." + klass ).show();
+        } );
       }
     },
 
@@ -314,13 +315,27 @@
       }
     },
 
+    showReports: {
+      value: function( data ) {
+        var reports = d3.select( "#reports" );
+
+        reports.selectAll( "li" )
+          .data( data.raw )
+          .enter()
+            .append( "li" )
+            .attr( "class", function( d ) { return "client-" + (d.client ? formatCSSClass( d.client ) : "unknown" ); } )
+            .html( printReport );
+      }
+    },
+
     visualize: {
       value: function() {
         if ( !( this.isDataReady && this.isRatesReady && this.isDomReady ) ) return;
 
         var data = this.massageData( this.data );
         this.drawFeeBubbles( data );
-        this.drawClientBars( data );
+        this.showReports( data );
+        //this.drawClientBars( data );
       }
     }
   } );
