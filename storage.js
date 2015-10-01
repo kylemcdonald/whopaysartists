@@ -10,21 +10,12 @@ module.exports = function(config) {
     default_users: []
   };
 
+  MongoClient.connect(process.env.MONGOLAB_URI, function(err, db) {
+    if(err) {
+      console.log(err);
+      return;
+    }
 
-  var mongoConnect;
-  if(process.env.HEROKU) {
-    mongoConnect = format("mongodb://%s:%s@%s:%s/whopaysartists",
-      process.env.MONGO_USERNAME,
-      process.env.MONGO_PASSWORD,
-      process.env.MONGO_HOST,
-      process.env.MONGO_PORT);
-  } else {
-    var host = 'localhost';
-    var port = 27017;
-    mongoConnect = format("mongodb://%s:%s/whopaysartists", host, port);
-  }
-
-  MongoClient.connect(mongoConnect, function(err, db) {
     storage.db = db;
     storage.db.createCollection('reports', function() {
 
