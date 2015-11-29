@@ -3,21 +3,12 @@
   <head>
     <title>Who Pays Artists?</title>
     <meta property="og:image" content="../images/header.png"/>
-    <link href='http://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300,700,300italic' rel='stylesheet' type='text/css'>
     <script type='text/javascript' src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
     <script type='text/javascript' src="javascript/printReport.js"></script>
     <script type='text/javascript' src="javascript/jquery.autocomplete.min.js"></script>
     <script type='text/javascript'>
-    function loadSome(data, count) {
-      var reports = $('#reports');
-      for(var i = 0; i < count && data.length; i++) {
-        reports.append("<li>" + printReport(data.pop()) + "</li>");
-      }
-      if(!data.length) {
-        $('#showall').hide();
-      }
-    }
     $.getJSON('data.json', function(data) {
       $(document).ready(function(){
         $('#count').text('all ' + data.length + ' stories');
@@ -28,16 +19,12 @@
               lookup: _.uniq(_.compact(_.pluck(data, x)))
           });
         });
-
-        // transform into reports
-        $('#learn').append('<a><p id="showall">Show all</p></a>');
-        loadSome(data, 10); // load 10 initially
-        $('#showall').click(function(){
-          loadSome(data, data.length);
-        });
       })
     })
     </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script type="text/javascript" src="javascript/vendor/money.min.js"></script>
+    <script type="text/javascript" src="javascript/visualize.js"></script>
     <link rel='stylesheet' href='stylesheets/style.css' />
     <link rel='stylesheet' href='stylesheets/css3-tips.css' />
   </head>
@@ -152,13 +139,19 @@
       <img src="images/yellow-background.png" class="split"/>
 
       <div id="learn" class="section">
-        <h2>Learn from the experience of others.</h2>
-        <p class="subtext">Refresh for a new selection, or click "Show all" for <span id="count">more</span>.</p>
-        <ul id="reports">
-          <noscript><li>Please enable JavaScript to see the reports.</li></noscript>
+        <h2>Learn from the experiences of others.</h2>
+        <noscript>Please enable JavaScript to see the reports.</noscript>
+
+        <div id="fee-bubbles"></div>
+        <div id="client-bars"></div>
+
+        <p class="subtext">Refresh for a new selection, or select a client above to show only those reports that pertain to it.</p>
+        <ul id="reports" class="all-shown">
         </ul>
       </div>
+
     </div>
+
 
       <div id="footer">
         <p>Inspired by <a href="http://whopayswriters.com">Who Pays Writers?</a> and developed by <a href="https://github.com/kylemcdonald/whopaysartists/contributors">a few contributors</a>.</p>
