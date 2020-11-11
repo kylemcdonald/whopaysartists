@@ -195,6 +195,7 @@ select {
   text-align: center;
   font-style: italic;
   font-size: 20px;
+  margin-bottom: 4em;
 }
 
 a, a:hover, a:link, a:visited {
