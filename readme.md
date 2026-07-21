@@ -24,6 +24,8 @@ npm run dev
 
 Wrangler serves the site on its printed port. Open it using the local-network hostname, for example `http://vibecheck.local:8788/`.
 
+The `dev` and `deploy` commands use the global Wrangler installation available on this machine; Wrangler is not a site dependency.
+
 The generated `dist/` directory is intentionally ignored by Git.
 
 ## Deployment
