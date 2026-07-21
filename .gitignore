@@ -1,4 +1,7 @@
 node_modules/
-.*
-config.js
-!.gitignore
+dist/
+.wrangler/
+.dev.vars
+.env
+.env.*
+!.env.example

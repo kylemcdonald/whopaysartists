@@ -1,81 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Who Pays Artists?</title>
-    <meta property="og:image" content="../images/header.png"/>
-    <link href='//fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
-    <script type='text/javascript' src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
-    <script type='text/javascript' src="javascript/printReport.js"></script>
-    <script type='text/javascript' src="javascript/jquery.autocomplete.min.js"></script>
-    <script type='text/javascript'>
-    function loadSome(data, count) {
-      var reports = $('#reports');
-      for(var i = 0; i < count && data.length; i++) {
-        reports.append("<li>" + printReport(data.pop()) + "</li>");
-      }
-      if(!data.length) {
-        $('#showall').hide();
-      }
-    }
-    $.getJSON('data.json', function(data) {
-      $(document).ready(function(){
-        $('#count').text('all ' + data.length + ' stories');
-
-        // setup autocomplete
-        ["client", "where", "medium"].forEach(function(x) {
-          $('#'+x).autocomplete({
-              lookup: _.uniq(_.compact(_.pluck(data, x)))
-          });
-        });
-
-        // transform into reports
-        $('#learn').append('<a><p id="showall">Show all</p></a>');
-        loadSome(data, 10); // load 10 initially
-        $('#showall').click(function(){
-          loadSome(data, data.length);
-        });
-      })
-    })
-    </script>
-    <link rel='stylesheet' href='stylesheets/style.css' />
-    <link rel='stylesheet' href='stylesheets/css3-tips.css' />
+    <meta name="description" content="Anonymous reports about how artists are paid for their work.">
+    <meta property="og:image" content="https://www.whopaysartists.com/images/header.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300,300italic" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/css3-tips.css">
+    <script src="/javascript/printReport.js" defer></script>
+    <script src="/javascript/index.js" defer></script>
   </head>
   <body>
 
     <div id="archived">This site has been archived.</div>
 
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-
     <div class="wrapper">
 
       <div id="header" class="section">
-        <a href="./"><h1>Who Pays<img src="../images/header.png"/ id="campaign-icon">Artists<span class="q">?</span></h1></a>
+        <a href="/"><h1>Who Pays<img src="/images/header.png" id="campaign-icon" alt="">Artists<span class="q">?</span></h1></a>
       </div>
 
-      <img src="images/top-background.png" class="split"/>
+      <img src="/images/top-background.png" class="split" alt="">
 
       <div id="intro" class="section">
         <h2>Making a living as an artist can be hard.</h2>
         <p>You never know how much to ask for. Discussions about money are taboo because we pretend that passion and creativity alone should pay the bills. Some of the best events have “no budget”, and sometimes only the worst events can make a career as an artist look painfully sustainable. Let’s help each other sort through some of the confusion, and develop an ongoing dialogue about how artists make money.</p>
 
-        <div class="fb-like" data-href="https://www.whopaysartists.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
       </div>
 
-      <img src="images/white-background.png" class="split"/>
+      <img src="/images/white-background.png" class="split" alt="">
 
       <div id="share" class="section">
         <h2>Share your experience.</h2>
         <p class="subtext">We are no longer accepting submissions.</p>
 
-        <form name="input" disabled>
+        <form name="input">
+          <fieldset disabled>
           <p>I was paid <span class="top-tip" data-tips="Only note your artist fee, sans materials or hired help. Leave empty to share your experience only."><input disabled name="fee" id="fee" placeholder="500" type="number" min="0" max="1000000" step="1" /></span>
             <span class="styled-select top-tip" data-tips="These are the four most commonly traded reserve currencies, please convert other currencies to one of these.">
               <select name="currency">
@@ -132,26 +96,12 @@
           <p>
             Also: <input disabled type="text" name="also" id="also" placeholder="Share details to help others understand your experience." maxlength="500" />
           </p>
-          <input disabled type="submit" value="Submit" class="submit">
+          <input type="submit" value="Submit" class="submit">
+          </fieldset>
         </form>
-
-        <% if (thanks) { %>
-          <div id="thanks">
-          Thanks for sharing! Your job has been <a href="<%= reportId %>">anonymously added</a> to the database.
-          </div>
-        <% } %>
-        <% if (errors) { %>
-          <div>
-            <% for(var i=0; i<errors.length; i++) { %>
-              <li>
-                <%= errors[i].msg %>
-              </li>
-            <% } %>
-          </div>
-        <% } %>
       </div>
 
-      <img src="images/yellow-background.png" class="split"/>
+      <img src="/images/yellow-background.png" class="split" alt="">
 
       <div id="learn" class="section">
         <h2>Learn from the experience of others.</h2>

@@ -92,6 +92,12 @@ h2{
   margin: 5px 0;
 }
 
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
 .subtext{
   font-style: italic;
   font-size: 18px;
@@ -177,6 +183,14 @@ select {
 }
 
 #showall {
+  display: block;
+  border: 0;
+  margin: 0 auto;
+  padding: 0;
+  color: rgb(255, 200, 60);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
   font-style: italic;
   text-decoration: underline;
   text-align: center;

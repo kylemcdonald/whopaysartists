@@ -1,40 +1,43 @@
-# [Who pays artists?](http://whopaysartists.com/)
+# [Who Pays Artists?](https://www.whopaysartists.com/)
 
-Right now [Who pays artists?](http://whopaysartists.com/) is a work in progress, with a mockup on the main page and this repository representing some initial work.
+Who Pays Artists is an archived collection of anonymous reports about how artists were paid for their work. The site no longer accepts submissions.
 
-If you'd like to contribute, you can help by closing any issues with PRs.
+## Architecture
 
-Because there is so much interest, make sure to comment that you are working to close an issue to avoid duplication of labor.
+The site is built as static HTML and deployed to Cloudflare Pages. The build creates:
 
-## Dependencies
- - Node - [http://nodejs.org/](http://nodejs.org/)
- - NPM - [https://www.npmjs.org/](https://www.npmjs.org/)
- - Mongo DB - [http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/)
+- The home page and downloadable JSON/CSV datasets.
+- One extensionless-compatible HTML page for every report ID.
+- A custom `404.html` page and Cloudflare Pages response headers.
 
-The easiest way to install these three dependancies is with Homebrew:
+There is no application server, database, or runtime environment.
 
-```
-$ brew update
-$ brew install node # npm comes baked into node
-$ brew install mongodb
-```
+## Local development
 
-## Getting setup
+Node.js 22 or newer is required.
 
- - Clone the repository
- - ```$ npm install```
- - ```$ npm start```
- - Point your browser to [http://localhost:3000](http://localhost:3000)
-
-## Common problems
-
-```Error: Cannot find module 'express'```
-
-Make sure you've run ```$ npm install```
-
-```
-TypeError: Cannot call method 'createCollection' of null 
-at /Users/youruser/Workspaces/WhoPaysArtists/storage.js:29:16
+```sh
+npm ci
+npm test
+npm run dev
 ```
 
-Make sure you've installed MongoDB and that it's running
+Wrangler serves the site on its printed port. Open it using the local-network hostname, for example `http://vibecheck.local:8788/`.
+
+The generated `dist/` directory is intentionally ignored by Git.
+
+## Deployment
+
+Cloudflare Pages builds the `master` branch with:
+
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Project name: `whopaysartists`
+
+Pushing to `master` triggers a production deployment. A maintainer with Cloudflare credentials can also deploy the current checkout directly:
+
+```sh
+npm run deploy
+```
+
+To add or remove reports, edit `data.json`, run `npm test`, and deploy the change.

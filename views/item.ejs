@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Who Pays Artists?</title>
-    <link href='http://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300,300italic' rel='stylesheet' type='text/css'>
-    <script type='text/javascript' src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type='text/javascript' src="javascript/printReport.js"></script>
+    <meta name="description" content="An anonymous report about how an artist was paid for their work.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300,300italic" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="/javascript/printReport.js" defer></script>
 <% if(!err) { %>
-    <script type='text/javascript'>
-    var report = <%- JSON.stringify(report) %>;
-    $(document).ready(function(){
-      $('#intro').append(printReport(report));
-    })
-    </script>
+    <script id="report-data" type="application/json"><%- reportJson %></script>
+    <script src="/javascript/item.js" defer></script>
 <% } %>
-    <link rel='stylesheet' href='stylesheets/style.css' />
   </head>
   <body>
     <div class="wrapper">
 
       <div id="header" class="section">
-        <a href="./"><h1>Who Pays<img src="../images/header.png"/>Artists<span class="q">?</span></h1></a>
+        <a href="/"><h1>Who Pays<img src="/images/header.png" alt="">Artists<span class="q">?</span></h1></a>
       </div>
 
-      <img src="../images/top-background.png" class="split"/>
+      <img src="/images/top-background.png" class="split" alt="">
 
       <div id="intro" class="section">
         <% if(err) { %><h2>Sorry, that item doesn't exist.</h2><% } %>
@@ -31,7 +31,7 @@
     </div>
 
       <div id="footer">
-        <p>Access all of the data in a single <a href="../data.json">JSON</a> or <a href="../data.csv">CSV</a> file.</a></p>
+        <p>Access all of the data in a single <a href="/data.json">JSON</a> or <a href="/data.csv">CSV</a> file.</p>
         <p><a href="mailto:info@whopaysartists.com" target="_blank">Contact us</a> or contribute on <a href="https://github.com/kylemcdonald/whopaysartists/" target="_blank">GitHub</a></p>
       </div>
   </body>

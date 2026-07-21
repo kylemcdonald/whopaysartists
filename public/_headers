@@ -1,0 +1,11 @@
+/*
+  Content-Security-Policy: default-src 'self'; connect-src 'self'; font-src https://fonts.gstatic.com; form-action 'none'; frame-ancestors 'none'; img-src 'self' data:; object-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; upgrade-insecure-requests
+  Permissions-Policy: camera=(), geolocation=(), microphone=()
+  Strict-Transport-Security: max-age=31536000
+  X-Frame-Options: DENY
+
+/data.json
+  Content-Disposition: attachment; filename="data.json"
+
+/data.csv
+  Content-Disposition: attachment; filename="data.csv"

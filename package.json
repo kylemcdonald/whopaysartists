@@ -1,16 +1,19 @@
 {
   "name": "whopaysartists.com",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
+  "description": "Static archive of anonymous artist payment reports",
   "scripts": {
-    "start": "node app.js"
+    "build": "node scripts/build.js",
+    "dev": "npm run build && wrangler pages dev dist --ip 0.0.0.0",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name whopaysartists",
+    "test": "npm run build && node --test"
   },
-  "dependencies": {
-    "ejs": "*",
-    "express": "^4.17.1",
-    "express-validator": "^6.6.1",
-    "json2csv": "^2.2.1",
-    "mongodb": "^3.6.3",
-    "underscore": "^1.6.0"
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "ejs": "^3.1.10",
+    "wrangler": "^4.113.0"
   }
 }
